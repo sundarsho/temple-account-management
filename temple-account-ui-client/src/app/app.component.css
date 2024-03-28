@@ -1,0 +1,48 @@
+.drawer-container {
+    display:block;
+    height: auto;
+  }
+
+  .mat-drawer {
+    padding: 10px;
+  }
+
+  ::ng-deep mat-drawer-content .mat-drawer-content .ng-star-inserted {
+    overflow-x: hidden;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.sidenav-toggle-button {
+    margin-right: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.tool-title-container {
+    background: linear-gradient(45deg,#33729F,#53a2dc, #bacde4);
+}
+
+.tool-title-bar {
+    background: #e5e5e5;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 255, 255, 0);
+    background-position-y: top;
+    background-size: cover;
+    height: 68px;
+    padding-top: 1px;
+    padding-right: 20px;
+}
+
+.drawer-item {
+    cursor: pointer;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.tool-title{
+    color: white;
+    font-weight: 400;
+}

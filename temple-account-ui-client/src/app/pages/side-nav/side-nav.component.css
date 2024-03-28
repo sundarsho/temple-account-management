@@ -1,0 +1,47 @@
+::ng-deep .mat-list-item-content {
+    padding: 0px 0px 0px 30px !important;
+}
+
+::ng-deep .mat-expansion-panel-header {
+    padding: 0px 30px !important;
+}
+
+mat-icon[_ngcontent-c4]{
+    margin: 2px 15px 0px 0px !important;
+    font-size: 19px;
+}
+
+.sidenav-layout {
+    padding-top: 8%;
+    overflow: hidden;
+}
+
+.drawer-item {
+    cursor: pointer;
+}
+
+.side-nav-item {
+    margin: 0px 0px;
+}
+
+.drawer-item:after {
+    display: none;
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+.side-nav-item-title {
+    font-size: 14px;
+    margin-right: 20px;
+    margin-left: 7px;
+}
+
+.side-nav-icon {
+    font-size: 20px;
+}
+
+.padding-adj-16 {
+    padding: 0 16px;
+}

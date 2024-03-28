@@ -1,0 +1,19 @@
+footer{
+    position: static;
+    bottom: 0;
+    width: 100% !important;
+    height: auto;
+    padding: 25px;
+    color: white;
+    background: #06a841;
+    background: linear-gradient(104deg, #232526 0%, #414345 100%);
+}
+
+.flex-box{
+    width: 100%;
+}
+
+span {
+    font-weight: 100;
+    font-size: 12px;
+}

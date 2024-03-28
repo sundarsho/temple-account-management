@@ -1,0 +1,67 @@
+<div class="sidenav-layout">
+    
+        <mat-nav-list>
+            <!-- <mat-list-item>
+                <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
+            </mat-list-item> -->
+            <mat-list-item>
+                <button routerLink="" mat-button><mat-icon>home</mat-icon> Home</button>
+            </mat-list-item>
+            <!-- <mat-list-item>
+                <button routerLink="slider" mat-button><mat-icon>explore</mat-icon> Slider</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
+            </mat-list-item> -->            
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>dashboard</mat-icon>
+                            <span class="side-nav-item-title">User Management</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <mat-list-item class="side-nav-item" routerLink="userlist">
+                            <button mat-button><mat-icon>supervisor_account</mat-icon>Users</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>
+                        <mat-list-item class="side-nav-item" routerLink="user">
+                            <button mat-button><mat-icon>supervised_user_circle</mat-icon>Add User</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>dashboard</mat-icon>
+                            <span class="side-nav-item-title">Payment & Invoice</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <mat-list-item class="side-nav-item" routerLink="payments">
+                            <button mat-button><mat-icon>payment</mat-icon>Payment</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>
+                        <mat-list-item class="side-nav-item" routerLink="invoice">
+                            <button mat-button><mat-icon>list_alt</mat-icon>Invoice</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+            </mat-accordion>   
+            <mat-list-item>
+                <button mat-button><mat-icon>settings</mat-icon> Maintenance</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button><mat-icon>help</mat-icon> Help</button>
+            </mat-list-item>         
+            
+        </mat-nav-list>

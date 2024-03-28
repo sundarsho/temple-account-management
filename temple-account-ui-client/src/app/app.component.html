@@ -1,0 +1,25 @@
+<header-component> </header-component>
+
+<div class="tool-title-container mat-elevation-z1">
+  <mat-toolbar class="tool-title-bar">
+  <button (click)="drawer.toggle()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+</button>
+<span class="tool-title">Temple Account Management</span>
+<span class="spacer"></span>
+<button mat-button>About</button>
+<button mat-button>contact</button>
+</mat-toolbar>
+</div>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <side-nav></side-nav>  
+  </mat-drawer>
+  <mat-drawer-content>
+      <div style="text-align: center;min-height: 600px;">
+
+          <router-outlet></router-outlet>
+          </div>
+  </mat-drawer-content>
+</mat-drawer-container>
