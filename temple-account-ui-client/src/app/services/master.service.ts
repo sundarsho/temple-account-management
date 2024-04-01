@@ -9,13 +9,9 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class MasterService {
 
-
-  UserSaveURL: string = "http://localhost:8080/temple/v1/user/save";
-
   constructor(private http: HttpClient) {    
   
   }
-
 
   GetUsers():Observable<User[]>{
     return this.http.get<User[]>("http://localhost:8080/temple/v1/users");

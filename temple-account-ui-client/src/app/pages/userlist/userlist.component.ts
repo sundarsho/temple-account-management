@@ -1,13 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../models/userdetails.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { MasterService } from '../../services/master.service';
 import { PopupComponent } from '../popup/popup.component';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DialogComponent } from '../dialog/dialog.component';
 
 
@@ -16,26 +14,42 @@ import { DialogComponent } from '../dialog/dialog.component';
   templateUrl: './userlist.component.html',
   styleUrl: './userlist.component.css'
 })
-export class UserlistComponent {
+export class UserlistComponent implements OnInit {
 
   public params : any;
   userlist !: User[];
   dataSource: any;
   displayedColumns: string[] = ["edit", "userId", "name", "fatherName", "Address",
    "city","state", "phone", "whatsApp","emailId", "notes"];
+
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
   constructor(private service: MasterService, private dialog: MatDialog) {
-    this.loadUserDetails();
+    this.loadUserDetails();    
   }
 
+  ngOnInit(): void {
+
+  }
+  
   loadUserDetails() {
     this.service.GetUsers().subscribe(res => {
       this.userlist = res;
       this.dataSource = new MatTableDataSource<User>(this.userlist);
       this.dataSource.paginator = this.paginatior;
       this.dataSource.sort = this.sort;
+
+      this.dataSource.filterPredicate = function(data: any, filter: string): boolean {
+        return data.userId.toString() === filter || 
+        data.name.toLowerCase().includes(filter) || 
+        data.fatherName.toLowerCase().includes(filter) ||
+        data.ancestorVillage.toLowerCase().includes(filter) ||
+        data.city.toLowerCase().includes(filter) ||
+        data.state.toLowerCase().includes(filter) ||
+        data.emailId.toLowerCase().includes(filter) 
+      };
+
     });
   }
 

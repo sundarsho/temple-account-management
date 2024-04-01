@@ -65,10 +65,13 @@ export class PopupComponent implements OnInit {
   }
 
   saveUser() {
-    this.service.saveUser(this.user).subscribe(data => {
-      console.log("User Saved Successfully");
-      this.closepopup();
-    });
+    if(this.UserUpdateForm.dirty){
+      this.service.saveUser(this.user).subscribe(data => {
+        console.log("User Saved Successfully");
+        this.closepopup();
+      });
+    }
+    this.closepopup();
   }
 
 
