@@ -15,6 +15,11 @@ import { UserlistComponent } from './pages/userlist/userlist.component';
 import { UserComponent } from './pages/user/user.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { PopupComponent } from './pages/popup/popup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './pages/home/home.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     SideNavComponent,
     UserlistComponent,
-    UserComponent  
+    UserComponent,
+    PopupComponent,
+    HomeComponent,
+    DialogComponent  
   ],
   imports: [
     BrowserModule,
@@ -33,7 +41,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatSidenavModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()

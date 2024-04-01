@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { User } from '../../models/userdetails.model';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { MasterService } from '../../services/master.service';
+import { PopupComponent } from '../popup/popup.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
@@ -15,7 +18,7 @@ import { MasterService } from '../../services/master.service';
 })
 export class UserlistComponent {
 
-
+  public params : any;
   userlist !: User[];
   dataSource: any;
   displayedColumns: string[] = ["edit", "userId", "name", "fatherName", "Address",
@@ -36,12 +39,49 @@ export class UserlistComponent {
     });
   }
 
-  editDialog(userId: number) {
-    throw new Error('Method not implemented.');
+  Filterchange(data: Event) {
+    const value = (data.target as HTMLInputElement).value;
+    this.dataSource.filter = value;
   }
 
-  // GetUsers():Observable<User[]>{
-  //   return this.http.get<User[]>("http://localhost:8080/user/all");
-  // }
+  editUser(element: User) {    
+    this.Openpopup(element, 'Edit User', PopupComponent);
+  }
+
+  deleteUser(element: User) {  
+    this.OpenDialog(element, 'Delete User', DialogComponent);
+      
+  }
+
+  OpenDialog(user: any, title: any,component:any) {
+    var _popup = this.dialog.open(component, {
+      width: '25%',
+      enterAnimationDuration: '10ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        title: title,
+        rowdata: user
+      }
+    });
+    _popup.afterClosed().subscribe(item => {
+      this.loadUserDetails();
+    })
+  }
+  
+
+  Openpopup(user: any, title: any,component:any) {
+    var _popup = this.dialog.open(component, {
+      width: '60%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        title: title,
+        rowdata: user
+      }
+    });
+    _popup.afterClosed().subscribe(item => {
+      this.loadUserDetails();
+    })
+  }
 
 }
