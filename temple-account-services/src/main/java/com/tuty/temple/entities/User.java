@@ -4,17 +4,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigInteger;
-
-@Getter
-@Setter
+@Data
 @Builder(toBuilder = true, builderClassName = "Builder")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "USER_DETAILS")
-public class UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

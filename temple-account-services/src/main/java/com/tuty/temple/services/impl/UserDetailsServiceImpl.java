@@ -1,19 +1,27 @@
 package com.tuty.temple.services.impl;
 
-import com.tuty.temple.entities.UserDetails;
+import com.tuty.temple.entities.User;
 import com.tuty.temple.repositories.UserDetailsRepository;
 import com.tuty.temple.services.UserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 
 @Service
 @RestController
 @Slf4j
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/v1")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -22,19 +30,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @GetMapping("/users")
-    public List<UserDetails> retrieveUserDetails() {
+    public List<User> retrieveUserDetails() {
         return userDetailsRepository.findAll();
     }
 
     @Override
-    @GetMapping("/{userId}")
-    public UserDetails fetchById(Long userId) {
+    @GetMapping("/user")
+    public User fetchById(@RequestParam(value="userId") Long userId) {
         return userDetailsRepository.findById(userId).orElse(null);
     }
 
     @Override
-    @PostMapping("/saveUser")
-    public UserDetails saveUser(UserDetails userDetails) {
-        return userDetailsRepository.save(userDetails);
+    @PostMapping(value = "/user/save")
+    public User saveUser( @RequestBody User user) {
+        return userDetailsRepository.save(user);
+    }
+
+    @Override
+    @DeleteMapping(value = "/user/delete")
+    public void deleteUser(@RequestParam(value="userId") Long userId){
+        userDetailsRepository.deleteById(userId);
     }
 }
