@@ -37,31 +37,13 @@ export class UserComponent {
   }
 
   ngOnInit(): void {
-    this.currentUserData = this.userform.value;
     
-    this.user = <User>{
-      userId: this.currentUserData.userId,
-      name: this.currentUserData.name,
-      fatherName: this.currentUserData.fatherName,
-      streetAddress1: this.currentUserData.streetAddress1,
-      streetAddress2: this.currentUserData.streetAddress2,
-      city: this.currentUserData.city,
-      state: this.currentUserData.state,
-      zipCode: this.currentUserData.zipCode,
-      ancestorVillage: this.currentUserData.ancestorVillage,
-      phone: this.currentUserData.phone,
-      whatsApp: this.currentUserData.whatsApp,
-      emailId: this.currentUserData.emailId,
-      notes: this.currentUserData.notes
-    }
-
-
     
   }  
 
   saveUser() {
     if(this.userform.dirty){
-      this.service.saveUser(this.user).subscribe(data => {
+      this.service.saveUser(this.userform.value).subscribe(data => {
         console.log("User Added Successfully");
       });
     }

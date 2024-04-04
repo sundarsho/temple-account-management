@@ -25,7 +25,7 @@ export class MasterService {
     return this.http.delete("http://localhost:8080/temple/v1/user/delete?userId="+userId);
   }
 
-  saveUser(user: User){
+  saveUser(user: any){
     let headers = new HttpHeaders();
     return this.http.post("http://localhost:8080/temple/v1/user/save",user, {
       headers: headers
