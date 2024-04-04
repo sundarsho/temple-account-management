@@ -1,17 +1,69 @@
-<h2>Angular Material - Input</h2>
-<mat-form-field class="example-full-width">
-    <input matInput placeholder="Enter text" />
-</mat-form-field>
-
-
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
+<form [formGroup]="userform" (ngSubmit)="saveUser()">
+    <h1 mat-dialog-title>Add User</h1>
+    <div mat-content>      
+       <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Father Name</mat-label>
+        <input formControlName="fatherName" matInput>
+       </mat-form-field>
+       <div>
+        <mat-radio-group formControlName="gender" color="primary">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+        <!-- <mat-checkbox formControlName="status" color="warn">Is Active</mat-checkbox> -->
+    </div>
+       <mat-form-field>
+        <mat-label>Street Address1</mat-label>
+        <input formControlName="streetAddress1" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>street Address2</mat-label>
+        <input formControlName="streetAddress2" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>city</mat-label>
+        <input formControlName="city" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>State</mat-label>
+        <input formControlName="state" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Zip Code</mat-label>
+        <input formControlName="zipCode" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Ancestor Village</mat-label>
+        <input formControlName="ancestorVillage" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input formControlName="phone" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Whats App</mat-label>
+        <input formControlName="whatsApp" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Email Id</mat-label>
+        <input formControlName="emailId" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Notes</mat-label>
+        <!-- <input matInput> -->
+        <textarea matInput formControlName="notes"></textarea>
     </mat-form-field>
-  
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <mat-select></mat-select>
-    </mat-form-field>
-  </form>
+       <!-- <div>
+        <mat-checkbox formControlName="status">Is Active</mat-checkbox>
+       </div> -->
+    </div>
+    <div mat-actions>
+        <button mat-raised-button type="submit" color="primary">Save</button>
+      <a (click)="clearform()" mat-raised-button color="warn">Reset</a>
+      <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+    </form>

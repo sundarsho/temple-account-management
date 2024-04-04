@@ -15,6 +15,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
     imports: [
@@ -33,7 +36,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatSidenavModule,
         MatMenuModule,
         MatListModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDatepickerModule,
+        MatAutocompleteModule,
+        MatFormFieldModule
     ],
     exports: [
         MatInputModule,
@@ -51,7 +57,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatSidenavModule,
         MatMenuModule,
         MatListModule,
-        MatExpansionModule      
+        MatExpansionModule,
+        MatDatepickerModule,
+        MatAutocompleteModule,
+        MatFormFieldModule              
     ],
     declarations: []
 })

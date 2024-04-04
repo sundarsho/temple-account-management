@@ -51,7 +51,7 @@ public class User {
     @Column(name="EMAIL_ID")
     private String emailId;
 
-    @Column(name="NOTES")
+    @Column(name="NOTES", columnDefinition = "TEXT")
     private String notes;
 
 }
