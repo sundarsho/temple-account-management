@@ -2,13 +2,15 @@
 
 <div class="tool-title-container mat-elevation-z1">
   <mat-toolbar class="tool-title-bar">
-  <button (click)="drawer.toggle()" mat-icon-button>
-    <mat-icon>menu</mat-icon>
-</button>
+  <ng-container>
+    <mat-icon matRipple class="sidenav-toggle-button" (click)="drawer.toggle()">menu</mat-icon>
+  </ng-container>
 <span class="tool-title">Temple Account Management</span>
 <span class="spacer"></span>
-<button mat-button>About</button>
-<button mat-button>contact</button>
+<button mat-raised-button class="tool-button">About</button>
+<span class="space"></span>
+<button mat-raised-button class="tool-button">
+  contact</button>
 </mat-toolbar>
 </div>
 
