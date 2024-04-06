@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { DialogComponent } from './pages/dialog/dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SearchUserComponent } from './search-user/search-user.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UserComponent,
     PopupComponent,
     HomeComponent,
-    DialogComponent  
+    DialogComponent,
+    SearchUserComponent,
+    PaymentComponent  
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@ export class UserlistComponent implements OnInit {
   public params : any;
   userlist !: User[];
   dataSource: any;
-  displayedColumns: string[] = ["edit", "userId", "name", "fatherName", "Address",
+  displayedColumns: string[] = ["edit", "userId", "name", "fatherName", "gender", "Address",
    "city","state", "phone", "whatsApp","emailId", "notes"];
 
   @ViewChild(MatPaginator) paginatior !: MatPaginator;

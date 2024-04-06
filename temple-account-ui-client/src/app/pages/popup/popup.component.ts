@@ -12,6 +12,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 })
 export class PopupComponent implements OnInit {
   inputdata: any;
+  editUser: any;
   user!: User;
   currentUserData!: User;
   UserUpdateForm: FormGroup;
@@ -67,6 +68,7 @@ export class PopupComponent implements OnInit {
   saveUser() {
     if(this.UserUpdateForm.dirty){
       this.service.saveUser(this.user).subscribe(data => {
+        this.editUser = data;
         console.log("User Saved Successfully");
         this.closepopup();
       });

@@ -1,0 +1,14 @@
+.mat-mdc-form-field {
+    width: 25%;
+    height: 70px;
+    margin: 1%;
+}
+
+.mat-50{
+    width: 100%;
+    margin: 1%;
+}
+
+button{
+    margin: 2px;
+}

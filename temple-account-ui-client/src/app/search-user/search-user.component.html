@@ -1,21 +1,58 @@
 <mat-card>
     <mat-card-header>
-      <mat-form-field>
-        <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />
-        <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Filter"> -->
-      </mat-form-field>
-  <button routerLink="/user" style="margin-left: 60%;" mat-raised-button color="primary">Add User (+)</button>
+
+  <form [formGroup]="userSearchform" (ngSubmit)="searchUser()">
+    <h1 mat-dialog-title>Search User</h1>
+    <div mat-content>     
+       <mat-form-field>
+        <mat-label>User Id</mat-label>
+        <input formControlName="userId" matInput>
+       </mat-form-field> 
+       <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Father Name</mat-label>
+        <input formControlName="fatherName" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>City</mat-label>
+        <input formControlName="city" matInput>
+       </mat-form-field>
+       <!-- <mat-form-field>
+        <mat-label>Zip Code</mat-label>
+        <input formControlName="zipCode" matInput>
+       </mat-form-field> -->
+       <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input formControlName="phone" matInput>
+       </mat-form-field>
+       <div>
+            <mat-radio-group formControlName="gender" color="primary">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+            <!-- <mat-checkbox formControlName="status" color="warn">Is Active</mat-checkbox> -->
+        </div>    
+    </div>
+    <div mat-actions>
+        <button mat-raised-button type="submit" color="primary">Search</button>
+    <!-- <a (click)="clearform()" mat-raised-button color="warn">Reset</a> -->
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+  </form>
 
     </mat-card-header>
+  <br/>
     <mat-card-content>
 
     
 <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="userId" matSortDirection="asc" matSortDisableClear>
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="payment">
         <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="editUser(element)"><mat-icon>edit</mat-icon></button>
-            <button mat-button (click)="deleteUser(element)"><mat-icon>delete</mat-icon></button>
+            <button mat-button (click)="redirectPaymentPage(element.userId)"><mat-icon>payment</mat-icon></button>
         </td>
       </ng-container>
 
@@ -43,20 +80,10 @@
         <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
         <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
       </ng-container>
-<!-- 
-      <ng-container matColumnDef="streetAddress2">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> streetAddress2</th>
-        <td mat-cell *matCellDef="let element">{{element.streetAddress2}}</td>
-      </ng-container> -->
 
       <ng-container matColumnDef="city">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> city</th>
         <td mat-cell *matCellDef="let element">{{element.city}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="state">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> state</th>
-        <td mat-cell *matCellDef="let element">{{element.state}}</td>
       </ng-container>
 
       <ng-container matColumnDef="zipCode">
@@ -71,21 +98,9 @@
       <ng-container matColumnDef="phone">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> phone</th>
         <td mat-cell *matCellDef="let element">{{element.phone}}</td>
-      </ng-container>
-      <ng-container matColumnDef="whatsApp">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> whatsApp</th>
-        <td mat-cell *matCellDef="let element">{{element.whatsApp}}</td>
-      </ng-container>
-      <ng-container matColumnDef="emailId">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> emailId</th>
-        <td mat-cell *matCellDef="let element">{{element.emailId}}</td>
-      </ng-container>
-      <ng-container matColumnDef="notes">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> notes</th>
-        <td mat-cell *matCellDef="let element">{{element.notes}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="action">
+      </ng-container>     
+          
+      <!-- <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action</th>
         <td mat-cell *matCellDef="let element">
 
@@ -93,7 +108,7 @@
             <button mat-raised-button color="warn">Delete</button>
             <button mat-raised-button color="primary">Detail</button>
         </td>
-      </ng-container>
+      </ng-container> -->
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
