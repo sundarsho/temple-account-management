@@ -8,6 +8,7 @@ import { MasterService } from '../services/master.service';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'search-user',
@@ -28,7 +29,7 @@ export class SearchUserComponent {
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
-  constructor(private service: MasterService) {
+  constructor(private service: MasterService, private router: Router) {
     
   }
 
@@ -97,9 +98,17 @@ export class SearchUserComponent {
   }
   
   redirectPaymentPage(userId: number) {    
+
+    this.router.navigate(['payment'], {
+      state: {
+        response: { data: userId },
+      },
+    });
     //this.Openpopup(element, 'Edit User', PopupComponent);
   }
 
-  
+  clearform(){
+    this.userSearchform.reset();
+  }  
   
 }

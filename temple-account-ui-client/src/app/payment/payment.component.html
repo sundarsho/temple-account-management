@@ -1,1 +1,8 @@
-<p>payment works!</p>
+<ng-container *ngIf="userDetails?.userId!=null">
+    <p>{{ userDetails.userId }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="userDetails===null">
+    <p>Sundar Testing</p>
+  </ng-container>
+

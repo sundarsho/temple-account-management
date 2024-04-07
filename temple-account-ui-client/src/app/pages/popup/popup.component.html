@@ -51,7 +51,8 @@
        </mat-form-field>
        <mat-form-field>
         <mat-label>Notes</mat-label>
-        <input matInput [(ngModel)]="user.notes" formControlName="notes">
+        <textarea matInput [(ngModel)]="user.notes" formControlName="notes"></textarea>
+        <!-- <input matInput [(ngModel)]="user.notes" formControlName="notes"> -->
        </mat-form-field>
        <!-- <div>
         <mat-checkbox formControlName="status">Is Active</mat-checkbox>

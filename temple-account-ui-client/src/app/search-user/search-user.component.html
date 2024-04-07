@@ -38,7 +38,7 @@
     </div>
     <div mat-actions>
         <button mat-raised-button type="submit" color="primary">Search</button>
-    <!-- <a (click)="clearform()" mat-raised-button color="warn">Reset</a> -->
+        <a (click)="clearform()" mat-raised-button color="warn">Reset</a>
     <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
     </div>
   </form>
@@ -52,7 +52,7 @@
     <ng-container matColumnDef="payment">
         <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="redirectPaymentPage(element.userId)"><mat-icon>payment</mat-icon></button>
+            <button mat-button [routerLink]="['../payment']" [queryParams]="{userId: element.userId}"><mat-icon>payment</mat-icon></button>
         </td>
       </ng-container>
 

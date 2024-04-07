@@ -11,8 +11,7 @@ export class MasterService {
 
   baseUrl!: string;
 
-  onNgInit(): void{
-    
+  onNgInit(): void{    
   }
 
   constructor(private http: HttpClient) {    
@@ -24,7 +23,7 @@ export class MasterService {
   }
 
   GetUserById(userId:any){
-    return this.http.get(this.baseUrl+"/user?userId="+userId);
+    return this.http.get<User>(this.baseUrl+"/user?userId="+userId);
   }
 
   deleteUser(userId:any){

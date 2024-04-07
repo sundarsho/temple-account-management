@@ -47,7 +47,8 @@ export class UserlistComponent implements OnInit {
         data.ancestorVillage.toLowerCase().includes(filter) ||
         data.city.toLowerCase().includes(filter) ||
         data.state.toLowerCase().includes(filter) ||
-        data.emailId.toLowerCase().includes(filter) 
+        data.emailId.toLowerCase().includes(filter) ||
+        data.gender?.toLowerCase().includes(filter) 
       };
 
     });
