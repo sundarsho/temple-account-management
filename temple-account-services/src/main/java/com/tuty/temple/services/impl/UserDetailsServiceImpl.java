@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -45,6 +46,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @PostMapping(value = "/user/save")
     public User saveUser( @RequestBody User user) {
+        if(user.getUserId()!=null){
+            user.setUpdatedBy("admin");
+            user.setUpdatedDt(LocalDateTime.now());
+        }else{
+            user.setCreatedBy("admin");
+            user.setCreatedDt(LocalDateTime.now());
+        }
         return userDetailsRepository.save(user);
     }
 

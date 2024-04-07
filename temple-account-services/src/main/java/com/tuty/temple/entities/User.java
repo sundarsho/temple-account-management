@@ -1,10 +1,18 @@
 package com.tuty.temple.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -56,18 +64,17 @@ public class User {
     @Column(name="EMAIL_ID")
     private String emailId;
 
-    @Lob
     @Column(name="NOTES")
     private String notes;
 
     @Column(name="CREATED_DT")
-    private LocalDate createdDt;
+    private LocalDateTime createdDt;
 
     @Column(name="CREATED_BY")
     private String createdBy;
 
     @Column(name="UPDATED_DT")
-    private LocalDate updatedDt;
+    private LocalDateTime updatedDt;
 
     @Column(name="UPDATED_BY")
     private String updatedBy;
