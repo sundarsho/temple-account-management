@@ -63,7 +63,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatDatepickerModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatSnackBarModule              
+        MatSnackBarModule            
     ],
     declarations: []
 })

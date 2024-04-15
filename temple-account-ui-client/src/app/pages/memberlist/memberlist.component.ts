@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from '../../models/userdetails.model';
+import { Member } from '../../models/temple.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,48 +10,50 @@ import { DialogComponent } from '../dialog/dialog.component';
 
 
 @Component({
-  selector: 'app-userlist',
-  templateUrl: './userlist.component.html',
-  styleUrl: './userlist.component.css'
+  selector: 'app-memberlist',
+  templateUrl: './memberlist.component.html',
+  styleUrl: './memberlist.component.css'
 })
-export class UserlistComponent implements OnInit {
+export class MemberlistComponent implements OnInit {
+[x: string]: any;
 
   public params : any;
-  userlist !: User[];
+  memberlist !: Member[];
   dataSource: any;
-  displayedColumns: string[] = ["edit", "userId", "name", "fatherName", "gender", "Address",
+  dataSourceExport: any;
+  displayedColumns: string[] = ["edit", "memberId", "name", "fatherName", "gender", "Address",
    "city","state", "phone", "whatsApp","emailId", "notes"];
 
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
   constructor(private service: MasterService, private dialog: MatDialog) {
-    this.loadUserDetails();    
+    this.loadMemberDetails();
   }
 
   ngOnInit(): void {
-
   }
-  
-  loadUserDetails() {
-    this.service.GetUsers().subscribe(res => {
-      this.userlist = res;
-      this.dataSource = new MatTableDataSource<User>(this.userlist);
+
+  loadMemberDetails() {
+    this.service.GetMembers().subscribe(res => {
+      this.memberlist = res;
+      this.dataSource = new MatTableDataSource<Member>(this.memberlist);
       this.dataSource.paginator = this.paginatior;
       this.dataSource.sort = this.sort;
 
       this.dataSource.filterPredicate = function(data: any, filter: string): boolean {
-        return data.userId.toString() === filter || 
-        data.name.toLowerCase().includes(filter) || 
+        return data.memberId.toString() === filter ||
+        data.name.toLowerCase().includes(filter) ||
         data.fatherName.toLowerCase().includes(filter) ||
         data.ancestorVillage.toLowerCase().includes(filter) ||
         data.city.toLowerCase().includes(filter) ||
         data.state.toLowerCase().includes(filter) ||
         data.emailId.toLowerCase().includes(filter) ||
-        data.gender?.toLowerCase().includes(filter) 
+        data.gender?.toLowerCase().includes(filter)
       };
 
     });
+
   }
 
   Filterchange(data: Event) {
@@ -59,43 +61,57 @@ export class UserlistComponent implements OnInit {
     this.dataSource.filter = value;
   }
 
-  editUser(element: User) {    
-    this.Openpopup(element, 'Edit User', PopupComponent);
+  editMember(element: Member) {
+    this.Openpopup(element, 'Edit Member', PopupComponent);
   }
 
-  deleteUser(element: User) {  
-    this.OpenDialog(element, 'Delete User', DialogComponent);
-      
+  deleteMember(element: Member) {
+    this.OpenDialog(element, 'Delete Member', DialogComponent);
   }
 
-  OpenDialog(user: any, title: any,component:any) {
+  exportMember(){
+    const timestamp = new Date().getTime(); // Get the current timestamp
+    const fileName = `exported_file_${timestamp}.csv`; // Append timestamp to the file name
+    this.service.exportMembersToCsv().subscribe((res: any) => {
+      const url = window.URL.createObjectURL(res);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName; // Change the file name if needed
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    });
+  }
+
+  OpenDialog(member: any, title: any,component:any) {
     var _popup = this.dialog.open(component, {
       width: '25%',
       enterAnimationDuration: '10ms',
       exitAnimationDuration: '300ms',
       data: {
         title: title,
-        rowdata: user
+        rowdata: member
       }
     });
     _popup.afterClosed().subscribe(item => {
-      this.loadUserDetails();
+      this.loadMemberDetails();
     })
   }
-  
 
-  Openpopup(user: any, title: any,component:any) {
+
+  Openpopup(member: any, title: any,component:any) {
     var _popup = this.dialog.open(component, {
       width: '60%',
       enterAnimationDuration: '300ms',
       exitAnimationDuration: '300ms',
       data: {
         title: title,
-        rowdata: user
+        rowdata: member
       }
     });
     _popup.afterClosed().subscribe(item => {
-      this.loadUserDetails();
+      this.loadMemberDetails();
     })
   }
 

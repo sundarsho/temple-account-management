@@ -1,5 +1,5 @@
 <div class="sidenav-layout">
-    
+
         <mat-nav-list>
             <!-- <mat-list-item>
                 <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
@@ -12,21 +12,26 @@
             </mat-list-item>
             <mat-list-item>
                 <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
-            </mat-list-item> -->            
+            </mat-list-item> -->
             <mat-accordion>
                 <mat-expansion-panel class="mat-elevation-z0">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <mat-icon>dashboard</mat-icon>
-                            <span class="side-nav-item-title">User Management</span>
+                            <span class="side-nav-item-title">Member Management</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
-                        <mat-list-item class="side-nav-item" routerLink="userlist">
-                            <button mat-button><mat-icon>supervisor_account</mat-icon>Users</button>
+                        <mat-list-item class="side-nav-item" routerLink="memberlist">
+                            <button mat-button><mat-icon>supervisor_account</mat-icon>Members</button>
                         </mat-list-item>
-                        <mat-list-item class="side-nav-item" routerLink="user">
-                            <button mat-button><mat-icon>supervised_user_circle</mat-icon>Add User</button>
+                        <mat-list-item class="side-nav-item" routerLink="member">
+                            <button mat-button><mat-icon>supervised_user_circle</mat-icon>Add Member</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>
+                        <mat-list-item class="side-nav-item" routerLink="searchMember">
+                            <button mat-button><mat-icon>search</mat-icon>Search Member</button>
                             <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
                             <span class="side-nav-item-title">Payment</span> -->
                         </mat-list-item>
@@ -41,12 +46,7 @@
                             <span class="side-nav-item-title">Payment & Invoice</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-nav-list>
-                        <mat-list-item class="side-nav-item" routerLink="searchUser">
-                            <button mat-button><mat-icon>search</mat-icon>Search User</button>
-                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
-                            <span class="side-nav-item-title">Payment</span> -->
-                        </mat-list-item>
+                    <mat-nav-list>                        
                         <mat-list-item class="side-nav-item" routerLink="payment">
                             <button mat-button><mat-icon>payment</mat-icon>Payment</button>
                             <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
@@ -59,12 +59,12 @@
                         </mat-list-item>
                     </mat-nav-list>
                 </mat-expansion-panel>
-            </mat-accordion>   
+            </mat-accordion>
             <mat-list-item>
                 <button mat-button><mat-icon>settings</mat-icon> Maintenance</button>
             </mat-list-item>
             <mat-list-item>
                 <button mat-button><mat-icon>help</mat-icon> Help</button>
-            </mat-list-item>         
-            
+            </mat-list-item>
+
         </mat-nav-list>

@@ -1,18 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { MasterService } from '../../services/master.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { User } from '../../models/userdetails.model';
+import { Member } from '../../models/temple.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  selector: 'app-member',
+  templateUrl: './member.component.html',
+  styleUrl: './member.component.css'
 })
-export class UserComponent {
-  user!: any;
-  currentUserData!: User;
-  userform: FormGroup;
+export class MemberComponent {
+  member!: any;
+  currentMemberData!: Member;
+  memberform: FormGroup;
 
   closemessage = 'closed using directive'
 
@@ -20,7 +20,7 @@ export class UserComponent {
   termlist=['15days','30days','45days','60days']
 
   constructor(private service: MasterService, private _snackBar: MatSnackBar) {
-    this.userform = new FormGroup({
+    this.memberform = new FormGroup({
       name: new FormControl(''),
       fatherName: new FormControl(''),
       gender: new FormControl(''),
@@ -39,24 +39,24 @@ export class UserComponent {
   }
 
   ngOnInit(): void {
-    
-    
-  }  
 
-  saveUser() {
-    if(this.userform.dirty){
-      this.service.saveUser(this.userform.value).subscribe(data => {
-        this.user = data;
-        this.openSnackBar("User Added Successfully - [ User ID - "+this.user.userId+" ]", "Close")
-        console.log("User Added Successfully");
+
+  }
+
+  saveMember() {
+    if(this.memberform.dirty){
+      this.service.saveMember(this.memberform.value).subscribe(data => {
+        this.member = data;
+        this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")
+        console.log("Member Added Successfully");
       });
     }
-    console.warn('User Added Successfully', this.userform.value);
-    this.userform.reset();
+    console.warn('Member Added Successfully', this.memberform.value);
+    this.memberform.reset();
   }
 
   clearform(){
-    this.userform.reset();
+    this.memberform.reset();
   }
 
   openSnackBar(message: string, action: string) {

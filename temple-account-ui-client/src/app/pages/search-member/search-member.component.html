@@ -1,12 +1,12 @@
 <mat-card>
     <mat-card-header>
 
-  <form [formGroup]="userSearchform" (ngSubmit)="searchUser()">
-    <h1 mat-dialog-title>Search User</h1>
+  <form [formGroup]="memberSearchform" (ngSubmit)="searchMember()">
+    <h1 mat-dialog-title>Search Member</h1>
     <div mat-content>     
        <mat-form-field>
-        <mat-label>User Id</mat-label>
-        <input formControlName="userId" matInput>
+        <mat-label>Member Id</mat-label>
+        <input formControlName="memberId" matInput>
        </mat-form-field> 
        <mat-form-field>
         <mat-label>Name</mat-label>
@@ -48,17 +48,17 @@
     <mat-card-content>
 
     
-<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="userId" matSortDirection="asc" matSortDisableClear>
+<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="memberId" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="payment">
         <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button [routerLink]="['../payment']" [queryParams]="{userId: element.userId}"><mat-icon>payment</mat-icon></button>
+            <button mat-button [routerLink]="['../payment']" [queryParams]="{memberId: element.memberId}"><mat-icon>payment</mat-icon></button>
         </td>
       </ng-container>
 
-    <ng-container matColumnDef="userId">
-      <th mat-sort-header mat-header-cell *matHeaderCellDef> UserId</th>
-      <td mat-cell *matCellDef="let element">{{element.userId}}</td>
+    <ng-container matColumnDef="memberId">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> MemberId</th>
+      <td mat-cell *matCellDef="let element">{{element.memberId}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">

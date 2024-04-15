@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from './pages/user/user.component';
-import { UserlistComponent } from './pages/userlist/userlist.component';
 import { HomeComponent } from './pages/home/home.component';
-import { SearchUserComponent } from './search-user/search-user.component';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { SearchMemberComponent } from './pages/search-member/search-member.component';
+import { MemberComponent } from './pages/member/member.component';
+import { MemberlistComponent } from './pages/memberlist/memberlist.component';
 
 const routes: Routes = [
-  {path:'userlist',component: UserlistComponent},
-  {path:'user',component: UserComponent},
+  {path:'memberlist',component: MemberlistComponent},
+  {path:'member',component: MemberComponent},
   {path:'home',component:HomeComponent},
-  {path:'searchUser',component:SearchUserComponent},
+  {path:'searchMember',component:SearchMemberComponent},
   {path:'payment',component:PaymentComponent}
   // {path:'associate',component:AssociateComponent}
 ];

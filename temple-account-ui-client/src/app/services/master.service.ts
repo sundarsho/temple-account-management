@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { User } from '../models/userdetails.model';
+import { Member } from '../models/temple.model';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -11,34 +11,38 @@ export class MasterService {
 
   baseUrl!: string;
 
-  onNgInit(): void{    
+  onNgInit(): void{
   }
 
-  constructor(private http: HttpClient) {    
+  constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8080/temple/v1";
   }
 
-  GetUsers():Observable<User[]>{
-    return this.http.get<User[]>(this.baseUrl+"/users");
+  GetMembers():Observable<Member[]>{
+    return this.http.get<Member[]>(this.baseUrl+"/members");
   }
 
-  GetUserById(userId:any){
-    return this.http.get<User>(this.baseUrl+"/user?userId="+userId);
+  GetMemberById(memberId:any){
+    return this.http.get<Member>(this.baseUrl+"/member?memberId="+memberId);
   }
 
-  deleteUser(userId:any){
-    return this.http.delete(this.baseUrl+"/user/delete?userId="+userId);
+  deleteMember(memberId:any){
+    return this.http.delete(this.baseUrl+"/member/delete?memberId="+memberId);
   }
 
-  saveUser(user: User){
+  saveMember(member: Member){
     let headers = new HttpHeaders();
-    return this.http.post(this.baseUrl+"/user/save",user, {
+    return this.http.post(this.baseUrl+"/member/save",member, {
       headers: headers
     })
   }
 
-  searchUser(params: HttpParams):Observable<User[]>{
-    return this.http.get<User[]>(this.baseUrl+"/user/search?"+params.toString());
+  searchMember(params: HttpParams):Observable<Member[]>{
+    return this.http.get<Member[]>(this.baseUrl+"/member/search?"+params.toString());
+  }
+
+  exportMembersToCsv(): Observable<Blob> {
+    return this.http.get(this.baseUrl+"/member/export", { responseType: 'blob' });
   }
 
 }

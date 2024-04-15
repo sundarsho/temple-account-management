@@ -1,5 +1,5 @@
-export interface User {
-    userId: number;
+export interface Member {
+    memberId: number;
     name: string;
     fatherName: string;
     gender: string;
@@ -13,10 +13,14 @@ export interface User {
     whatsApp: string;
     emailId: string;
     notes: string;
+    createdDt: Date;
+    createdBy: string;
+    updatedDt: Date;
+    updatedBy: string;
 }
 
-export interface SearchUserQuery {
-    userId: number;
+export interface SearchMemberQuery {
+    memberId: number;
     name: string;
     fatherName: string;
     gender: string;

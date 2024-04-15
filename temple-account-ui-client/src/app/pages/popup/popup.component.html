@@ -1,58 +1,62 @@
-<form [formGroup]="UserUpdateForm" (ngSubmit)="saveUser()">
+<form [formGroup]="MemberUpdateForm" (ngSubmit)="saveMember()">
     <h1 mat-dialog-title>{{inputdata.title}}</h1>
     <div mat-dialog-content>
       <mat-form-field>
-        <mat-label>User Id</mat-label>
-        <input [(ngModel)]="user.userId" formControlName="userId" matInput readonly >
+        <mat-label>Member Id</mat-label>
+        <input [(ngModel)]="member.memberId" formControlName="memberId" matInput readonly >
        </mat-form-field>
        <mat-form-field>
         <mat-label>Name</mat-label>
-        <input [(ngModel)]="user.name" formControlName="name" matInput>
+        <input [(ngModel)]="member.name" formControlName="name" matInput>
        </mat-form-field>
        <mat-form-field>
         <mat-label>Father Name</mat-label>
-        <input matInput [(ngModel)]="user.fatherName" formControlName="fatherName">
+        <input matInput [(ngModel)]="member.fatherName" formControlName="fatherName">
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <input matInput [(ngModel)]="member.gender" formControlName="gender" readonly>
        </mat-form-field>
        <mat-form-field>
         <mat-label>Street Address1</mat-label>
-        <input matInput [(ngModel)]="user.streetAddress1" formControlName="streetAddress1">
+        <input matInput [(ngModel)]="member.streetAddress1" formControlName="streetAddress1">
        </mat-form-field>
        <mat-form-field>
         <mat-label>street Address2</mat-label>
-        <input matInput [(ngModel)]="user.streetAddress2" formControlName="streetAddress2">
+        <input matInput [(ngModel)]="member.streetAddress2" formControlName="streetAddress2">
        </mat-form-field>
        <mat-form-field>
         <mat-label>city</mat-label>
-        <input matInput [(ngModel)]="user.city" formControlName="city">
+        <input matInput [(ngModel)]="member.city" formControlName="city">
        </mat-form-field>
        <mat-form-field>
         <mat-label>State</mat-label>
-        <input matInput [(ngModel)]="user.state" formControlName="state">
+        <input matInput [(ngModel)]="member.state" formControlName="state">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Zip Code</mat-label>
-        <input matInput [(ngModel)]="user.zipCode" formControlName="zipCode">
+        <input matInput [(ngModel)]="member.zipCode" formControlName="zipCode">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Ancestor Village</mat-label>
-        <input matInput [(ngModel)]="user.ancestorVillage" formControlName="ancestorVillage">
+        <input matInput [(ngModel)]="member.ancestorVillage" formControlName="ancestorVillage">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Phone</mat-label>
-        <input matInput [(ngModel)]="user.phone" formControlName="phone">
+        <input matInput [(ngModel)]="member.phone" formControlName="phone">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Whats App</mat-label>
-        <input matInput [(ngModel)]="user.whatsApp" formControlName="whatsApp">
+        <input matInput [(ngModel)]="member.whatsApp" formControlName="whatsApp">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Email Id</mat-label>
-        <input matInput [(ngModel)]="user.emailId" formControlName="emailId">
+        <input matInput [(ngModel)]="member.emailId" formControlName="emailId">
        </mat-form-field>
        <mat-form-field>
         <mat-label>Notes</mat-label>
-        <textarea matInput [(ngModel)]="user.notes" formControlName="notes"></textarea>
-        <!-- <input matInput [(ngModel)]="user.notes" formControlName="notes"> -->
+        <textarea matInput [(ngModel)]="member.notes" formControlName="notes"></textarea>
+        <!-- <input matInput [(ngModel)]="member.notes" formControlName="notes"> -->
        </mat-form-field>
        <!-- <div>
         <mat-checkbox formControlName="status">Is Active</mat-checkbox>

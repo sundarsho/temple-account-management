@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MasterService } from '../../services/master.service';
-import { User } from '../../models/userdetails.model';
+import { Member } from '../../models/temple.model';
 
 @Component({
   selector: 'dialog-component',
@@ -10,36 +10,36 @@ import { User } from '../../models/userdetails.model';
 })
 export class DialogComponent {
 
-  currentUserData!: User;
-  user!: User;
+  currentMemberData!: Member;
+  member!: Member;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DialogComponent>,
     private service: MasterService) {
-      
+
     }
 
     ngOnInit(): void {
-      this.currentUserData = this.data.rowdata;
-      this.user = <User>{
-        userId: this.currentUserData.userId,
-        name: this.currentUserData.name,
-        fatherName: this.currentUserData.fatherName,
-        streetAddress1: this.currentUserData.streetAddress1,
-        streetAddress2: this.currentUserData.streetAddress2,
-        city: this.currentUserData.city,
-        state: this.currentUserData.state,
-        zipCode: this.currentUserData.zipCode,
-        ancestorVillage: this.currentUserData.ancestorVillage,
-        phone: this.currentUserData.phone,
-        whatsApp: this.currentUserData.whatsApp,
-        emailId: this.currentUserData.emailId,
-        notes: this.currentUserData.notes
+      this.currentMemberData = this.data.rowdata;
+      this.member = <Member>{
+        memberId: this.currentMemberData.memberId,
+        name: this.currentMemberData.name,
+        fatherName: this.currentMemberData.fatherName,
+        streetAddress1: this.currentMemberData.streetAddress1,
+        streetAddress2: this.currentMemberData.streetAddress2,
+        city: this.currentMemberData.city,
+        state: this.currentMemberData.state,
+        zipCode: this.currentMemberData.zipCode,
+        ancestorVillage: this.currentMemberData.ancestorVillage,
+        phone: this.currentMemberData.phone,
+        whatsApp: this.currentMemberData.whatsApp,
+        emailId: this.currentMemberData.emailId,
+        notes: this.currentMemberData.notes
       }
 
   }
 
-  deleteUser(userId: any) { 
-      this.service.deleteUser(userId).subscribe(res => {
+  deleteUser(memberId: any) {
+      this.service.deleteMember(memberId).subscribe(res => {
         console.log("User Deleted Successfully.");
       });
       this.closepopup();

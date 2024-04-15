@@ -11,8 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from './pages/footer/footer.component';
 import { SideNavComponent } from './pages/side-nav/side-nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { UserlistComponent } from './pages/userlist/userlist.component';
-import { UserComponent } from './pages/user/user.component';
+import { MemberlistComponent } from './pages/memberlist/memberlist.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { PopupComponent } from './pages/popup/popup.component';
@@ -21,8 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { DialogComponent } from './pages/dialog/dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SearchUserComponent } from './search-user/search-user.component';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { SearchMemberComponent } from './pages/search-member/search-member.component';
+import { MemberComponent } from './pages/member/member.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +30,13 @@ import { PaymentComponent } from './payment/payment.component';
     HeaderComponent,
     FooterComponent,
     SideNavComponent,
-    UserlistComponent,
-    UserComponent,
+    MemberlistComponent,
     PopupComponent,
     HomeComponent,
     DialogComponent,
-    SearchUserComponent,
-    PaymentComponent  
+    SearchMemberComponent,
+    PaymentComponent,
+    MemberComponent
   ],
   imports: [
     BrowserModule,

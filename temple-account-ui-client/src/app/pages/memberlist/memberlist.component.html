@@ -1,27 +1,33 @@
 <mat-card>
     <mat-card-header>
       <mat-form-field>
-        <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />
+        <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />        
         <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Filter"> -->
       </mat-form-field>
-  <button routerLink="/user" style="margin-left: 60%;" mat-raised-button color="primary">Add User (+)</button>
-
+      <span class="spacer"></span>
+        <button routerLink="/member" mat-raised-button color="primary">Add User (+)</button>     
+        <span class="space"></span>   
+        <button (click)="exportMember()" mat-raised-button color="primary">Export to CSV 
+          <mat-icon>download</mat-icon> 
+        </button>
+        <span class="space"></span>
+        <button (click)="loadMemberDetails()" mat-raised-button color="primary">Refresh Data 
+          <mat-icon>refresh</mat-icon> 
+        </button>
     </mat-card-header>
     <mat-card-content>
-
-    
-<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="userId" matSortDirection="asc" matSortDisableClear>
+  <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="memberId" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="edit">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Action</th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="editUser(element)"><mat-icon>edit</mat-icon></button>
-            <button mat-button (click)="deleteUser(element)"><mat-icon>delete</mat-icon></button>
+          <mat-icon class="icon" (click)="editMember(element)">edit</mat-icon>
+          <mat-icon class="icon" (click)="deleteMember(element)">delete</mat-icon>
         </td>
       </ng-container>
 
-    <ng-container matColumnDef="userId">
-      <th mat-sort-header mat-header-cell *matHeaderCellDef> UserId</th>
-      <td mat-cell *matCellDef="let element">{{element.userId}}</td>
+    <ng-container matColumnDef="memberId">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Member Id</th>
+      <td mat-cell *matCellDef="let element">{{element.memberId}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -43,49 +49,49 @@
         <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
         <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
       </ng-container>
-<!-- 
+<!--
       <ng-container matColumnDef="streetAddress2">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> streetAddress2</th>
         <td mat-cell *matCellDef="let element">{{element.streetAddress2}}</td>
       </ng-container> -->
 
       <ng-container matColumnDef="city">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> city</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> City</th>
         <td mat-cell *matCellDef="let element">{{element.city}}</td>
       </ng-container>
 
       <ng-container matColumnDef="state">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> state</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> State</th>
         <td mat-cell *matCellDef="let element">{{element.state}}</td>
       </ng-container>
 
       <ng-container matColumnDef="zipCode">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> zipCode</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> ZipCode</th>
         <td mat-cell *matCellDef="let element">{{element.zipCode}}</td>
       </ng-container>
 
       <ng-container matColumnDef="ancestorVillage">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> ancestorVillage</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> AncestorVillage</th>
         <td mat-cell *matCellDef="let element">{{element.ancestorVillage}}</td>
       </ng-container>
       <ng-container matColumnDef="phone">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> phone</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Phone</th>
         <td mat-cell *matCellDef="let element">{{element.phone}}</td>
       </ng-container>
       <ng-container matColumnDef="whatsApp">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> whatsApp</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> WhatsApp</th>
         <td mat-cell *matCellDef="let element">{{element.whatsApp}}</td>
       </ng-container>
       <ng-container matColumnDef="emailId">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> emailId</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> EmailId</th>
         <td mat-cell *matCellDef="let element">{{element.emailId}}</td>
       </ng-container>
       <ng-container matColumnDef="notes">
-        <th mat-sort-header mat-header-cell *matHeaderCellDef> notes</th>
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Notes</th>
         <td mat-cell *matCellDef="let element">{{element.notes}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="action">
+      <!-- <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action</th>
         <td mat-cell *matCellDef="let element">
 
@@ -93,13 +99,13 @@
             <button mat-raised-button color="warn">Delete</button>
             <button mat-raised-button color="primary">Detail</button>
         </td>
-      </ng-container>
+      </ng-container> -->
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
 
-</table>
+    </table>
 
 </mat-card-content>
 <br>

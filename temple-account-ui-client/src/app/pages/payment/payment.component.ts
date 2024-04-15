@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../models/userdetails.model';
+import { Member } from '../../models/temple.model';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { MasterService } from '../services/master.service';
+import { MasterService } from '../../services/master.service';
 
 @Component({
   selector: 'app-payment',
@@ -15,7 +15,7 @@ export class PaymentComponent implements OnInit{
   constructor(private service: MasterService, private route: ActivatedRoute) {    
   }
 
-  userDetails!: any;
+  memberDetails!: any;
   
   ngOnInit() {
     //let userId = this.route.snapshot.paramMap.get('userId');
@@ -29,13 +29,13 @@ export class PaymentComponent implements OnInit{
     // }
 
     this.route.queryParamMap.subscribe(params => {
-      const userId = params.get('userId');
-      if(userId!=null && userId!='undefined'){   
-        this.service.GetUserById(userId).subscribe(res => {
-          this.userDetails = res;
+      const memberId = params.get('memberId');
+      if(memberId!=null && memberId!='undefined'){   
+        this.service.GetMemberById(memberId).subscribe(res => {
+          this.memberDetails = res;
         });
       }else{
-        this.userDetails = null;
+        this.memberDetails = null;
       }           
     });
 
