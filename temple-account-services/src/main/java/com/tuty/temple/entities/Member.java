@@ -20,13 +20,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER_DETAILS")
-public class User {
+@Table(name = "MEMBER_DETAILS")
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="USER_ID")
-    private Long userId;
+    @Column(name="MEMBER_ID")
+    private Long memberId;
 
     @Column(name="NAME")
     private String name;

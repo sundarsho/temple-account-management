@@ -1,6 +1,6 @@
 package com.tuty.temple.filter;
 
-import com.tuty.temple.entities.User;
+import com.tuty.temple.entities.Member;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
@@ -18,9 +18,9 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsSearchFilter {
+public class MemberDetailsSearchFilter {
 
-    private Long userId;
+    private Long memberId;
     private String name;
     private String fatherName;
     private String city;
@@ -31,7 +31,7 @@ public class UserDetailsSearchFilter {
     private String ancestorVillage;
     private String emailId;
 
-    public Specification<User> toSpecification(){
+    public Specification<Member> toSpecification(){
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -57,10 +57,10 @@ public class UserDetailsSearchFilter {
                 }
             });
 
-            if(Objects.nonNull(userId)){
+            if(Objects.nonNull(memberId)){
                 /*predicates.add(criteriaBuilder
                         .like(root.get("userId").as(String.class),"%"+userId+"%"));*/
-                predicates.add(criteriaBuilder.equal(root.get("userId"), userId));
+                predicates.add(criteriaBuilder.equal(root.get("memberId"), memberId));
 
             }
 
