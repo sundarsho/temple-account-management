@@ -1,6 +1,6 @@
 package com.tuty.temple.filter;
 
-import com.tuty.temple.entities.Member;
+import com.tuty.temple.entities.Payment;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,32 +20,28 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDetailsSearchFilter {
+public class PaymentSearchFilter {
 
+    private Long paymentId;
     private Long memberId;
-    private String name;
-    private String fatherName;
-    private String city;
-    private String phone;
-    private String whatsApp;
-    private String gender;
-    private String zipCode;
-    private String ancestorVillage;
-    private String emailId;
+    private Long receiptNo;
+    private String occasion;
+    private String paymentType;
+    private String financialYear;
+    private LocalDate paymentDate;
+    private String paymentMode;
 
-    public Specification<Member> toSpecification(){
+    public Specification<Payment> toSpecification(){
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             Map<String, String> stringFilters = new HashMap<>();
-            stringFilters.put("name",name);
-            stringFilters.put("fatherName", fatherName);
-            stringFilters.put("gender",gender);
-            stringFilters.put("ancestorVillage", ancestorVillage);
-            stringFilters.put("city", city);
-            stringFilters.put("zipCode", zipCode);
-            stringFilters.put("phone", phone);
-            stringFilters.put("emailId", emailId);
+            stringFilters.put("occasion",occasion);
+            stringFilters.put("paymentType", paymentType);
+            stringFilters.put("financialYear", financialYear);
+            stringFilters.put("paymentDate", String.valueOf(paymentDate));
+            stringFilters.put("paymentMode", paymentMode);
+            stringFilters.put("receiptNo", String.valueOf(receiptNo));
 
             stringFilters.forEach((fieldName, value) -> {
                 if(StringUtils.isBlank(value)) return;
@@ -58,16 +56,15 @@ public class MemberDetailsSearchFilter {
             });
 
             if(Objects.nonNull(memberId)){
-                /*predicates.add(criteriaBuilder
-                        .like(root.get("userId").as(String.class),"%"+userId+"%"));*/
                 predicates.add(criteriaBuilder.equal(root.get("memberId"), memberId));
+            }
 
+            if(Objects.nonNull(paymentId)){
+                predicates.add(criteriaBuilder.equal(root.get("paymentId"), paymentId));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 
     }
-
-
 }

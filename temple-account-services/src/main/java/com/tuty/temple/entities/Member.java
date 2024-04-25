@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,11 +21,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "MEMBER_DETAILS")
+@Table(name = "MEMBER")
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="MEMBER_ID_SEQ")
     @Column(name="MEMBER_ID")
     private Long memberId;
 
@@ -64,6 +65,7 @@ public class Member {
     @Column(name="EMAIL_ID")
     private String emailId;
 
+    @Lob
     @Column(name="NOTES")
     private String notes;
 

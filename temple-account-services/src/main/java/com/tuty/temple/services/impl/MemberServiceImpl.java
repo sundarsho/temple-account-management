@@ -1,9 +1,9 @@
 package com.tuty.temple.services.impl;
 
 import com.tuty.temple.entities.Member;
-import com.tuty.temple.filter.MemberDetailsSearchFilter;
-import com.tuty.temple.repositories.MemberDetailsRepository;
-import com.tuty.temple.services.MemberDetailsService;
+import com.tuty.temple.filter.MemberSearchFilter;
+import com.tuty.temple.repositories.MemberRepository;
+import com.tuty.temple.services.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,10 +31,10 @@ import java.util.List;
 @Slf4j
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/v1")
-public class MemberDetailsServiceImpl implements MemberDetailsService {
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
-    MemberDetailsRepository memberDetailsRepository;
+    MemberRepository memberRepository;
 
     @Autowired
     ExportReportService exportReportService;
@@ -44,19 +42,18 @@ public class MemberDetailsServiceImpl implements MemberDetailsService {
     @Override
     @GetMapping("/members")
     public List<Member> retrieveMemberDetails() {
-        return memberDetailsRepository.findAll();
+        return memberRepository.findAll();
     }
 
     @Override
     @GetMapping("/member")
     public Member fetchById(@RequestParam(value="memberId") Long memberId) {
-        return memberDetailsRepository.findById(memberId).orElse(null);
+        return memberRepository.findById(memberId).orElse(null);
     }
 
     @Override
     @PostMapping(value = "/member/save")
     public Member saveMember(@RequestBody Member member) {
-
         if(member.getMemberId()!=null){
             member.setUpdatedBy("admin");
             member.setUpdatedDt(LocalDateTime.now());
@@ -64,28 +61,28 @@ public class MemberDetailsServiceImpl implements MemberDetailsService {
             member.setCreatedBy("admin");
             member.setCreatedDt(LocalDateTime.now());
         }
-        return memberDetailsRepository.save(member);
+        return memberRepository.save(member);
     }
     @Override
     @DeleteMapping(value = "/member/delete")
     public void deleteMember(@RequestParam(value="memberId") Long memberId){
-        memberDetailsRepository.deleteById(memberId);
+        memberRepository.deleteById(memberId);
     }
 
     @Override
     @GetMapping("/member/search")
-    public List<Member> searchMember(@ParameterObject MemberDetailsSearchFilter memberDetailsSearchFilter) {
-        return memberDetailsRepository.findAll(memberDetailsSearchFilter.toSpecification());
+    public List<Member> searchMember(@ParameterObject MemberSearchFilter memberSearchFilter) {
+        return memberRepository.findAll(memberSearchFilter.toSpecification());
     }
 
     @Override
     @GetMapping("/member/export")
     public ResponseEntity<byte[]> exportMemberDetails(HttpServletResponse response) {
         // Define the file name
-        String fileName = "exported_data.csv";
+        String fileName = "export_member_data.csv";
         try{
 
-        List<Member> members = memberDetailsRepository.findAll();
+        List<Member> members = memberRepository.findAll();
         // Export data to CSV
         byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class);
 
