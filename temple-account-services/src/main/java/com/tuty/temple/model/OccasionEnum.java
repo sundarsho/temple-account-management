@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Occasion {
+public enum OccasionEnum {
 
-    MSP("Maha Sivarathri Poojai");
+    MSRP("MSRP","Maha Sivarathri Poojai");
 
+    private final String code;
     private final String description;
-    
+
 }

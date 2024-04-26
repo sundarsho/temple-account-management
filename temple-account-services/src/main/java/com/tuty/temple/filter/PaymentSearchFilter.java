@@ -25,7 +25,7 @@ public class PaymentSearchFilter {
     private Long paymentId;
     private Long memberId;
     private Long receiptNo;
-    private String occasion;
+    private String occasionCd;
     private String paymentType;
     private String financialYear;
     private LocalDate paymentDate;
@@ -36,12 +36,10 @@ public class PaymentSearchFilter {
             List<Predicate> predicates = new ArrayList<>();
 
             Map<String, String> stringFilters = new HashMap<>();
-            stringFilters.put("occasion",occasion);
+            stringFilters.put("occasionCd",occasionCd);
             stringFilters.put("paymentType", paymentType);
             stringFilters.put("financialYear", financialYear);
-            stringFilters.put("paymentDate", String.valueOf(paymentDate));
             stringFilters.put("paymentMode", paymentMode);
-            stringFilters.put("receiptNo", String.valueOf(receiptNo));
 
             stringFilters.forEach((fieldName, value) -> {
                 if(StringUtils.isBlank(value)) return;
@@ -56,11 +54,19 @@ public class PaymentSearchFilter {
             });
 
             if(Objects.nonNull(memberId)){
-                predicates.add(criteriaBuilder.equal(root.get("memberId"), memberId));
+                predicates.add(criteriaBuilder.equal(root.join("member").get("memberId"), memberId));
             }
 
             if(Objects.nonNull(paymentId)){
                 predicates.add(criteriaBuilder.equal(root.get("paymentId"), paymentId));
+            }
+
+            if(Objects.nonNull(paymentDate)){
+                predicates.add(criteriaBuilder.equal(root.get("paymentDate"), paymentDate));
+            }
+
+            if(Objects.nonNull(receiptNo)){
+                predicates.add(criteriaBuilder.equal(root.get("receiptNo"), receiptNo));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

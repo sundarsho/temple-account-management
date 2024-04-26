@@ -1,7 +1,8 @@
 package com.tuty.temple.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.tuty.temple.model.Occasion;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tuty.temple.model.OccasionEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -46,9 +46,19 @@ public class Payment {
 
     @Column(name = "OCCASION_CD")
     private String occasionCd;
+
     @Transient
-    private String getOccasionDesc(){
-        return Occasion.valueOf(occasionCd).toString();
+    @JsonProperty("occasionDesc")
+    public String getOccasionDesc() {
+        if (this.occasionCd == null) {
+            return null;
+        }
+        for (OccasionEnum occasion : OccasionEnum.values()) {
+            if (occasion.getCode().equalsIgnoreCase(this.occasionCd)) {
+                return occasion.getDescription();
+            }
+        }
+        return null;
     }
 
     @Column(name="PAYMENT_TYPE")

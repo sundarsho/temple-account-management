@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -78,8 +79,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @GetMapping("/member/export")
     public ResponseEntity<byte[]> exportMemberDetails(HttpServletResponse response) {
-        // Define the file name
-        String fileName = "export_member_data.csv";
+        String fileName = "export_member_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
         try{
 
         List<Member> members = memberRepository.findAll();

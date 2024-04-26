@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long>, JpaSpecificationExecutor<Payment> {
 
-    @Query(value = "SELECT COALESCE(MAX(RECEIPT_NO), 1000) FROM PAYMENT WHERE FINANCIAL_YEAR =:financialYear", nativeQuery = true)
-    int getMaxReceiptNo(@Param("financialYear") String financialYear);
+    @Query(value = "SELECT COALESCE(MAX(RECEIPT_NO), 1001) FROM PAYMENT WHERE FINANCIAL_YEAR =:financialYear", nativeQuery = true)
+    Long getMaxReceiptNo(@Param("financialYear") String financialYear);
 }

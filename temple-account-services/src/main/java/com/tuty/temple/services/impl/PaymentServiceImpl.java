@@ -1,9 +1,7 @@
 package com.tuty.temple.services.impl;
 
-import com.tuty.temple.entities.Member;
 import com.tuty.temple.entities.Payment;
 import com.tuty.temple.filter.PaymentSearchFilter;
-import com.tuty.temple.model.Occasion;
 import com.tuty.temple.repositories.PaymentRepository;
 import com.tuty.temple.services.PaymentService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 @Service
 @RestController
@@ -47,7 +46,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @PostMapping(value = "/payment/save")
     public Payment savePayment(@RequestBody Payment payment) {
+
         if(payment.getPaymentId()!=null){
+            long receiptNo = paymentRepository.getMaxReceiptNo(payment.getFinancialYear())+1;
+            payment.setReceiptNo(receiptNo);
             payment.setUpdatedBy("admin");
             payment.setUpdatedDt(LocalDateTime.now());
         }else{
@@ -72,7 +74,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @GetMapping("/payment/export")
     public ResponseEntity<byte[]> exportPayment(PaymentSearchFilter paymentSearchFilter, HttpServletResponse response) {
-        String fileName = "export_Payment_data.csv";
+        String fileName = "export_Payment_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
+
         try{
 
             List<Payment> payments = paymentRepository.findAll(paymentSearchFilter.toSpecification());
