@@ -65,6 +65,9 @@ public class Member {
     @Column(name="EMAIL_ID")
     private String emailId;
 
+    @Column(name="STATUS")
+    private String status;
+
     @Lob
     @Column(name="NOTES")
     private String notes;
