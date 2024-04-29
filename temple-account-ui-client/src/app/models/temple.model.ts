@@ -32,4 +32,37 @@ export interface SearchMemberQuery {
     emailId: string;
 }
 
+export interface SearchPaymentQuery {
+    paymentId: number;
+    memberId: number;
+    receiptNo: number;
+    occasionCd: string;
+    paymentType: string;
+    financialYear: string;
+    paymentDate: Date;
+    paymentMode: string;
+}
+
+export interface Payment {
+    paymentId: number;
+    member: Member;
+    receiptNo: number;
+    occasionCd: string;
+    occasionDesc: string;
+    paymentType: string;
+    paymentAmount: number;
+    financialYear: string;
+    paymentDate: Date;
+    paymentMode: string;
+    createdDt: Date;
+    createdBy: string;
+    updatedDt: Date;
+    updatedBy: string;
+}
+
+export interface Occasion {
+    value: string;
+    viewValue: string;
+  }
+
 

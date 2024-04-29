@@ -29,12 +29,7 @@
                             <button mat-button><mat-icon>supervised_user_circle</mat-icon>Add Member</button>
                             <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
                             <span class="side-nav-item-title">Payment</span> -->
-                        </mat-list-item>
-                        <mat-list-item class="side-nav-item" routerLink="searchMember">
-                            <button mat-button><mat-icon>search</mat-icon>Search Member</button>
-                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
-                            <span class="side-nav-item-title">Payment</span> -->
-                        </mat-list-item>
+                        </mat-list-item>                        
                     </mat-nav-list>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -46,7 +41,12 @@
                             <span class="side-nav-item-title">Payment & Invoice</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-nav-list>                        
+                    <mat-nav-list>  
+                        <mat-list-item class="side-nav-item" routerLink="searchMember">
+                            <button mat-button><mat-icon>search</mat-icon>Search Member</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>                      
                         <mat-list-item class="side-nav-item" routerLink="payment">
                             <button mat-button><mat-icon>payment</mat-icon>Payment</button>
                             <!-- <mat-icon class="side-nav-icon">payment</mat-icon>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 @Service
 @RestController
@@ -48,11 +49,11 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment savePayment(@RequestBody Payment payment) {
 
         if(payment.getPaymentId()!=null){
-            long receiptNo = paymentRepository.getMaxReceiptNo(payment.getFinancialYear())+1;
-            payment.setReceiptNo(receiptNo);
             payment.setUpdatedBy("admin");
             payment.setUpdatedDt(LocalDateTime.now());
         }else{
+            long receiptNo = paymentRepository.getMaxReceiptNo(payment.getFinancialYear())+1;
+            payment.setReceiptNo(receiptNo);
             payment.setCreatedBy("admin");
             payment.setCreatedDt(LocalDateTime.now());
         }
@@ -75,12 +76,12 @@ public class PaymentServiceImpl implements PaymentService {
     @GetMapping("/payment/export")
     public ResponseEntity<byte[]> exportPayment(PaymentSearchFilter paymentSearchFilter, HttpServletResponse response) {
         String fileName = "export_Payment_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
-
+        List<String> ignoreFields = Arrays.asList("Member");
         try{
 
-            List<Payment> payments = paymentRepository.findAll(paymentSearchFilter.toSpecification());
+            List<Payment> payments = searchPayment(paymentSearchFilter);
             // Export data to CSV
-            byte[] byteArray = exportReportService.exportToCSV(fileName, payments, Payment.class);
+            byte[] byteArray = exportReportService.exportToCSV(fileName, payments, Payment.class, ignoreFields);
 
 
             HttpHeaders headers = new HttpHeaders();

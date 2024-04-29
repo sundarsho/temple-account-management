@@ -84,7 +84,7 @@ public class MemberServiceImpl implements MemberService {
 
         List<Member> members = memberRepository.findAll();
         // Export data to CSV
-        byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class);
+        byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class, null);
 
 
         HttpHeaders headers = new HttpHeaders();

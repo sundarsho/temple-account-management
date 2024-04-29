@@ -1,8 +1,24 @@
-<h2 mat-dialog-title>Delete Member</h2>
-<mat-dialog-content>
-  Would you like to delete member {{member.memberId}} - {{member.name}} ?
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-raised-button mat-dialog-close>No</button>
-  <button mat-button mat-raised-button cdkFocusInitial (click)="deleteUser(currentMemberData.memberId)" >Ok</button>
-</mat-dialog-actions>
+<div mat-dialog-content>
+  <ng-container *ngIf="this.pageTitle=='Member'">
+    <h2 mat-dialog-title>Delete Member</h2>
+    <mat-dialog-content>
+      Would you like to delete member {{member.memberId}} - {{member.name}} {{member.fatherName}} ?
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-raised-button mat-dialog-close>No</button>
+      <button mat-button mat-raised-button cdkFocusInitial (click)="deleteMember(currentMemberData.memberId)" >Ok</button>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <ng-container *ngIf="this.pageTitle=='Payment'">
+    <h2 mat-dialog-title>Delete Payment</h2>
+    <mat-dialog-content>
+      Would you like to delete payment<br/> 
+      Payment Id : {{payment.paymentId}} <br/> Receipt No : {{payment.receiptNo}} <br/> Occation : {{payment.occasionDesc}}
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-raised-button mat-dialog-close>No</button>
+      <button mat-button mat-raised-button cdkFocusInitial (click)="deletePayment(currentPaymentData.paymentId)" >Ok</button>
+    </mat-dialog-actions>
+  </ng-container>
+</div>

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MasterService } from '../../services/master.service';
-import { Member } from '../../models/temple.model';
+import { Member, Payment } from '../../models/temple.model';
 
 @Component({
   selector: 'dialog-component',
@@ -13,37 +13,51 @@ export class DialogComponent {
   currentMemberData!: Member;
   member!: Member;
 
+  pageTitle: any;
+
+  currentPaymentData!: Payment;
+  payment!: Payment;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DialogComponent>,
     private service: MasterService) {
 
     }
 
     ngOnInit(): void {
-      this.currentMemberData = this.data.rowdata;
-      this.member = <Member>{
-        memberId: this.currentMemberData.memberId,
-        name: this.currentMemberData.name,
-        fatherName: this.currentMemberData.fatherName,
-        streetAddress1: this.currentMemberData.streetAddress1,
-        streetAddress2: this.currentMemberData.streetAddress2,
-        city: this.currentMemberData.city,
-        state: this.currentMemberData.state,
-        zipCode: this.currentMemberData.zipCode,
-        ancestorVillage: this.currentMemberData.ancestorVillage,
-        phone: this.currentMemberData.phone,
-        whatsApp: this.currentMemberData.whatsApp,
-        emailId: this.currentMemberData.emailId,
-        notes: this.currentMemberData.notes
+      this.pageTitle = this.data.title;
+      if(this.data.title == 'Member'){        
+        this.currentMemberData = this.data.rowdata;
+        this.member = <Member>{
+          memberId: this.currentMemberData.memberId,
+          name: this.currentMemberData.name,
+          fatherName: this.currentMemberData.fatherName
+        }
+      }else if(this.data.title == 'Payment'){
+        this.currentPaymentData = this.data.rowdata;
+        this.payment = <Payment>{
+          paymentId: this.currentPaymentData.paymentId,
+          receiptNo: this.currentPaymentData.receiptNo,
+          occasionDesc: this.currentPaymentData.occasionDesc
+        }
       }
+
+      
 
   }
 
-  deleteUser(memberId: any) {
+  deleteMember(memberId: any) {
       this.service.deleteMember(memberId).subscribe(res => {
-        console.log("User Deleted Successfully.");
+        console.log("Member Deleted Successfully.");
       });
       this.closepopup();
   }
+
+  deletePayment(paymentId: any) {
+    this.service.deletePayment(paymentId).subscribe(res => {
+      console.log("Payment Deleted Successfully.");
+    });
+    this.closepopup();
+}
 
   closepopup() {
     this.ref.close('Closed using function');

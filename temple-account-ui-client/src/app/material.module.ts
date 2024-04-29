@@ -19,6 +19,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -65,6 +66,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatFormFieldModule,
         MatSnackBarModule            
     ],
-    declarations: []
+    declarations: [],
+    providers: [provideNativeDateAdapter()]
 })
 export class MaterialModule { }

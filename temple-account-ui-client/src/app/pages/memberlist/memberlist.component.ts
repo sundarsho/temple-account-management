@@ -66,7 +66,7 @@ export class MemberlistComponent implements OnInit {
   }
 
   deleteMember(element: Member) {
-    this.OpenDialog(element, 'Delete Member', DialogComponent);
+    this.OpenDialog(element, 'Member', DialogComponent);
   }
 
   exportMember(){

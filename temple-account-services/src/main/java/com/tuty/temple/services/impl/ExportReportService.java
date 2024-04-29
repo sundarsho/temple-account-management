@@ -12,22 +12,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
 public class ExportReportService {
 
-    public <T> byte[] exportToCSV(String fileName, Collection<T> data, Class<T> entityType) throws IOException {
+    public <T> byte[] exportToCSV(String fileName, Collection<T> data, Class<T> entityType, List<String> ignoreFields) throws IOException {
         // Get the fields of YourEntity class
-        Field[] fields = Member.class.getDeclaredFields();
+        Field[] fields = entityType.getDeclaredFields();
 
         try (FileWriter writer = new FileWriter(fileName)) {
             // Write CSV header
-            writeHeader(writer, fields);
+            writeHeader(writer, fields, ignoreFields);
 
             // Write data rows
             for (T obj : data) {
-                writeDataRow(writer, obj, fields);
+                writeDataRow(writer, obj, fields,ignoreFields);
             }
             writer.flush();
         }
@@ -36,7 +37,7 @@ public class ExportReportService {
     }
 
     public static byte[] convertToByteArray(String fileName) throws IOException {
-        try (FileInputStream fis = new FileInputStream(new File(fileName));
+        try (FileInputStream fis = new FileInputStream(fileName);
              ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 
             byte[] buffer = new byte[1024];
@@ -52,25 +53,32 @@ public class ExportReportService {
         }
     }
 
-    private void writeHeader(FileWriter writer, Field[] fields) throws IOException {
+    private void writeHeader(FileWriter writer, Field[] fields, List<String> ignoreFields) throws IOException {
         // Write CSV header
         for (int i = 0; i < fields.length; i++) {
-            writer.append(splitCamelCase(fields[i].getName()));
-            if (i < fields.length - 1) {
-                writer.append(",");
+            boolean isIgnoredField = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
+            if(!isIgnoredField){
+                writer.append(splitCamelCase(fields[i].getName()));
+                if (i < fields.length - 1) {
+                    writer.append(",");
+                }
             }
+
         }
         writer.append("\n");
     }
 
-    private <T> void writeDataRow(FileWriter writer, T obj, Field[] fields) throws IOException {
+    private <T> void writeDataRow(FileWriter writer, T obj, Field[] fields, List<String> ignoreFields) throws IOException {
         // Write data row dynamically based on the fields
         for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
-            Object value = ReflectionUtils.getField(fields[i], obj);
-            writer.append(String.valueOf(value));
-            if (i < fields.length - 1) {
-                writer.append(",");
+            boolean isIgnored = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
+            if(!isIgnored){
+                fields[i].setAccessible(true);
+                Object value = ReflectionUtils.getField(fields[i], obj);
+                writer.append(String.valueOf(value));
+                if (i < fields.length - 1) {
+                    writer.append(",");
+                }
             }
         }
         writer.append("\n");
