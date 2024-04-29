@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { SearchMemberComponent } from './pages/search-member/search-member.component';
 import { MemberComponent } from './pages/member/member.component';
+import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MemberComponent } from './pages/member/member.component';
     DialogComponent,
     SearchMemberComponent,
     PaymentComponent,
-    MemberComponent
+    MemberComponent,
+    EditPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { MemberComponent } from './pages/member/member.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule    
   ],
   providers: [
     provideAnimationsAsync()

@@ -1,0 +1,61 @@
+<form [formGroup]="editPaymentform" (ngSubmit)="savePayment()">
+    <h1 mat-dialog-title>Edit Payment</h1>  
+    <div mat-dialog-content>    
+    <mat-form-field>
+        <mat-label>Payment Id</mat-label>
+        <input [(ngModel)]="payment.paymentId" formControlName="paymentId" matInput readonly >
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Member Id</mat-label>
+        <input [(ngModel)]="memberDetails.memberId" formControlName="memberId" matInput readonly >
+    </mat-form-field>
+        
+       <mat-form-field>
+        <mat-label>Financial Year</mat-label>      
+        <input [(ngModel)]="payment.financialYear"  [matAutocomplete]="auto" formControlName="financialYear" matInput>
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option [value]="item" *ngFor="let item of financialYearList">{{item}}</mat-option>
+          </mat-autocomplete>
+      </mat-form-field>     
+       <mat-form-field>
+        <mat-label>Payment Date</mat-label>
+        <input [(ngModel)]="payment.paymentDate" matInput [matDatepicker]="picker" formControlName="paymentDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+       <mat-form-field class="mat-50">
+        <mat-label>Function/Occasion</mat-label>
+        <mat-select [(ngModel)]="payment.occasionCd" formControlName="occasionCd" >
+          @for (occasion of occasions; track occasion) {
+            <mat-option [value]="occasion.value">{{occasion.viewValue}}</mat-option>
+          }
+        </mat-select>      
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Payment Type</mat-label>
+        <!-- <input matInput> -->
+        <input [(ngModel)]="payment.paymentType"  [matAutocomplete]="type" formControlName="paymentType" matInput>
+          <mat-autocomplete #type="matAutocomplete">
+            <mat-option [value]="item" *ngFor="let item of paymentTypeList">{{item}}</mat-option>
+          </mat-autocomplete>      
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Payment Mode</mat-label>
+        <!-- <input matInput> -->
+        <input [(ngModel)]="payment.paymentMode" [matAutocomplete]="mode" formControlName="paymentMode" matInput>
+          <mat-autocomplete #mode="matAutocomplete">
+            <mat-option [value]="item" *ngFor="let item of paymentModeList">{{item}}</mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+       <mat-form-field>
+        <mat-label>Payment Amount</mat-label>
+        <input [(ngModel)]="payment.paymentAmount"  formControlName="paymentAmount" type="number" matInput>
+       </mat-form-field>         
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary">Save</button>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+  </form>

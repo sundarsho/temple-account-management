@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { EditPaymentComponent } from '../edit-payment/edit-payment.component';
 
 @Component({
   selector: 'app-payment',
@@ -129,7 +130,7 @@ export class PaymentComponent implements OnInit{
   }
 
   editPayment(element: Payment) {
-    //this.Openpopup(element, 'Edit Member', PopupComponent);
+    this.OpenEditPayment(element, 'Edit Member', EditPaymentComponent);
   }
 
   deletePayment(element: Payment) {
@@ -156,7 +157,23 @@ export class PaymentComponent implements OnInit{
   }
   
   printPayment(element: Payment) {
-    //this.Openpopup(element, 'Edit Member', PopupComponent);
+    //this.OpenEditPayment(element, 'Edit Payment', EditPaymentComponent);
+  }
+
+  OpenEditPayment(payment: any, title: any,component:any) {
+    var _popup = this.dialog.open(component, {
+      width: '60%',
+      enterAnimationDuration: '300ms',
+      exitAnimationDuration: '300ms',
+      data: {
+        memberDetails: this.memberDetails,
+        title: title,
+        rowdata: payment
+      }
+    });
+    _popup.afterClosed().subscribe(item => {
+      this.loadPayments(this.memberDetails?.memberId);
+    })
   }
 
   OpenDialog(payment: any, title: any,component:any) {
