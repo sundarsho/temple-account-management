@@ -51,66 +51,29 @@ export class PrintTemplateComponent {
 }
 
   printPayment(paymentId: any) { 
-    this.generatePDF();
+    this.generatePDF(paymentId);
   }
 
   closepopup() {
     this.ref.close('Closed using function');
   }
 
-  generatePDF() {
+  generatePDF(paymentId: any) {
     this.el.nativeElement.style.display='block';
      console.log(this.el.nativeElement);
-    //  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-    //  mywindow?.document.write('<html><head><title>' + document.title  + '</title>');
-    //  //mywindow?.document.write('<style>.h1{}</style>');
-    //  mywindow?.document.write('</head><body >');
-    //  mywindow?.document.write('<h1>' + document.title  + '</h1>');
-    //  mywindow?.document.write(this.el.nativeElement.innerHTML);
-    //  mywindow?.document.write('</body></html>');
- 
-    //  mywindow?.document.close(); // necessary for IE >= 10
-    //  mywindow?.focus(); // necessary for IE >= 10*/
- 
-    //  mywindow?.print();
-    //  mywindow?.close();
-     const element: any = document.getElementById('printContent'); // Replace with your template's element ID
+     const element: any = document.getElementById('printContent'); 
     
     html2canvas(element).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jspdf('p','px','a4');
-      //pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      console.log(pdfWidth+"----"+pdfHeight);
-      //pdf.addImage(imgData, 'PNG', 100, 100, pdfWidth, pdfHeight);
       pdf.addImage(imgData, 'PNG', 0.25, 0, pdfWidth, pdfHeight);
-      pdf.save('template.pdf');
+      let fileName = 'Receipt_'+paymentId+'_'+this.memberDetails.memberId+'.pdf';
+      pdf.save(fileName);
+
     });
 
-    // html2canvas(element).then(canvas => {
-    //   const imgData = canvas.toDataURL('image/png');
-    //   const pdf = new jspdf('p','px','a4');
-    //   const imgWidth = 210;
-    //   const pageHeight = 297;
-    //   console.log(canvas.height +"----"+canvas.width);
-    //   const imgHeight = canvas.height * imgWidth / canvas.width;
-    //   let heightLeft = imgHeight;
-    //   let position = 0;
-
-    //   pdf.addImage(imgData, 'PNG', 50, position, imgWidth, imgHeight);
-    //   heightLeft -= pageHeight;
-
-    //   while (heightLeft >= 0) {
-    //     position = heightLeft - imgHeight;
-    //     pdf.addPage();
-    //     pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-    //     heightLeft -= pageHeight;
-    //   }
-
-    //   pdf.save('template.pdf');
-    // });
 }
 }
