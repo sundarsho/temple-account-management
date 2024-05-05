@@ -1,6 +1,5 @@
 
-<!-- 
-  <div #htmlContainer></div> -->
+
   <ng-container *ngIf="this.pageTitle=='ViewPayment'">
     
     <div #printContent id="printContent">
@@ -14,7 +13,9 @@
             <h3>நன்கொடை ரசீது</h3>
 
             <div id="member" class="clearfix">
-              <div><span class="details">தேதி: </span> <b>{{payment.paymentDate | date: 'dd/MM/yyyy'}}</b></div>
+              <div><span class="details">
+                கட்டணம் தேதி: </span> <b>{{payment.paymentDate | date: 'dd/MM/yyyy'}}</b></div>
+              <div><span class="details">கட்டண முறை: </span> <b>{{payment.paymentMode}}</b></div>
             </div>
             <div id="project">
               <div><span class="details">உறுப்பினர் அடையாள எண்: </span> <b>{{memberDetails.memberId}}</b></div>
@@ -26,47 +27,41 @@
             <table>
               <thead>
                 <tr>
-                  <th class="service">SERVICE</th>
-                  <th class="desc">DESCRIPTION</th>
-                  <th>PRICE</th>
-                  <th>QTY</th>
-                  <th>TOTAL</th>
+                  <th class="service">ரசீது எண்</th>
+                  <th class="service">கட்டண விவரம்</th>
+                  <th class="service">தொகை (ரூ)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="service">Design</td>
-                  <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
-                  <td class="unit">$40.00</td>
-                  <td class="qty">26</td>
-                  <td class="total">$1,040.00</td>
-                </tr>
-                <tr>
-                  <td class="service">Development</td>
-                  <td class="desc">Developing a Content Management System-based Website</td>
-                  <td class="unit">$40.00</td>
-                  <td class="qty">80</td>
-                  <td class="total">$3,200.00</td>
+                  <td ><b>{{payment.receiptNo}}</b></td>
+                  <td class="desc">{{payment.occasionDesc}}</td>
+                  <td class="amount">₹{{payment.paymentAmount}}</td>                  
                 </tr>                
                 <tr>
-                  <td colspan="4">SUBTOTAL</td>
-                  <td class="total">$5,200.00</td>
-                </tr>
-                <tr>
-                  <td colspan="4">TAX 25%</td>
-                  <td class="total">$1,300.00</td>
-                </tr>
-                <tr>
-                  <td colspan="4" class="grand total">GRAND TOTAL</td>
-                  <td class="grand total">$6,500.00</td>
+                  <td colspan="2" class="total">மொத்த தொகை</td>
+                  <td class="amount">₹{{payment.paymentAmount}}</td>
                 </tr>
               </tbody>
             </table>
-            <div id="notices">
-              <div>NOTICE:</div>
-              <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+            <div id="service">
+              <div><span class="details">
+                தொகை (எழுத்தாயில்): </span> {{payment.paymentAmount.toString() | amountInWords}}</div>
+              <!-- <div class="details">தொகை (எழுத்தாயில்): </div>
+              <div class="service">{{payment.paymentAmount.toString() | amountInWords}}</div> -->
             </div>
-          </div>
+            <header class="clearfix"> 
+              <div id="project">
+                <div><span class="details">வசூலிப்பவர்: </span> <b>{{payment.receivedBy}}</b></div>
+              </div>
+              <div id="member" class="clearfix">                
+                <br/>
+                <br/>
+                <div><span class="details">
+                  கையொப்பம் </span></div>
+              </div>
+            </header>
+      </div>
 
 </div>
 <div mat-dialog-actions>

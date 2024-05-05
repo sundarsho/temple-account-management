@@ -43,13 +43,14 @@ export class PrintTemplateComponent {
         paymentDate: this.currentPaymentData.paymentDate,
         paymentMode: this.currentPaymentData.paymentMode,
         paymentAmount: this.currentPaymentData.paymentAmount,
-        financialYear: this.currentPaymentData.financialYear
+        financialYear: this.currentPaymentData.financialYear,
+        receivedBy: this.currentPaymentData.receivedBy,
+        comments: this.currentPaymentData.comments
       }
     }
 }
 
-  printPayment(paymentId: any) {
-    this.pagePrint = 'printPayment';    
+  printPayment(paymentId: any) { 
     this.generatePDF();
   }
 

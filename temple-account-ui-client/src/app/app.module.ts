@@ -25,6 +25,7 @@ import { SearchMemberComponent } from './pages/search-member/search-member.compo
 import { MemberComponent } from './pages/member/member.component';
 import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
 import { PrintTemplateComponent } from './pages/print-template/print-template.component';
+import { AmountInWordsPipe } from './services/amount-in-words';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PrintTemplateComponent } from './pages/print-template/print-template.co
     PaymentComponent,
     MemberComponent,
     EditPaymentComponent,
-    PrintTemplateComponent
+    PrintTemplateComponent,
+    AmountInWordsPipe
   ],
   imports: [
     BrowserModule,

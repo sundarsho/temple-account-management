@@ -78,6 +78,25 @@ h3 {
   text-align: center;
   margin: 0 0 10px 0;
 }  
+
+.service{
+  font-size: 15px;
+  font-family: VANAVILAvvaiyar_9;
+  color: #17A243;
+  -webkit-text-stroke: 0.5px #17A243;
+}
+
+.total{
+  font-size: 15px;
+  font-family: VANAVILAvvaiyar_9;
+  color: #17A243;
+  text-align: right;
+  -webkit-text-stroke: 0.5px #17A243;
+}
+
+.amount{  
+  text-align: right;
+}
   
   #project {
     float: left;
@@ -94,7 +113,6 @@ h3 {
   
   #member {
     float: right;
-    text-align: right;
   }
   
   #project div,
