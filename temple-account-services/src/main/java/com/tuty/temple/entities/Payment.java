@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -75,6 +76,13 @@ public class Payment {
 
     @Column(name="PAYMENT_MODE")
     private String paymentMode;
+
+    @Lob
+    @Column(name="COMMENTS")
+    private String comments;
+
+    @Column(name="RECEIVED_BY")
+    private String receivedBy;
 
     @Column(name="CREATED_DT")
     private LocalDateTime createdDt;

@@ -16,6 +16,7 @@ export class PopupComponent implements OnInit {
   member!: Member;
   currentMemberData!: Member;
   MemberUpdateForm: FormGroup;
+  statusInd: boolean = false;
 
   closemessage = 'closed using directive'
 
@@ -36,9 +37,10 @@ export class PopupComponent implements OnInit {
         phone: new FormControl(''),
         whatsApp: new FormControl(''),
         emailId: new FormControl(''),
-        notes: new FormControl('')
+        notes: new FormControl(''),
+        statusInd:new FormControl('')
       });
-
+      
   }
   ngOnInit(): void {
     this.inputdata = this.data;
@@ -60,7 +62,16 @@ export class PopupComponent implements OnInit {
         emailId: this.currentMemberData.emailId,
         notes: this.currentMemberData.notes,
         createdDt: this.currentMemberData.createdDt,
-        createdBy: this.currentMemberData.createdBy
+        createdBy: this.currentMemberData.createdBy,
+        status: this.currentMemberData.status 
+      }
+
+      if(this.member.status!=null && this.member.status!='undefined'){  
+        if(this.member.status == 'Active'){
+          this.statusInd = true; 
+        }else{
+          this.statusInd = false; 
+        }
       }
 
   }
@@ -71,6 +82,11 @@ export class PopupComponent implements OnInit {
 
   saveMember() {
     if(this.MemberUpdateForm.dirty){
+      if(this.statusInd == true){
+        this.member.status = 'Active';
+      }else{
+        this.member.status = 'InActive';
+      }
       this.service.saveMember(this.member).subscribe(data => {
         this.editMember = data;
         console.log("Member Saved Successfully");

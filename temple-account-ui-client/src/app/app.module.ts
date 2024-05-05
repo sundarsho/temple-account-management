@@ -24,6 +24,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { SearchMemberComponent } from './pages/search-member/search-member.component';
 import { MemberComponent } from './pages/member/member.component';
 import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
+import { PrintTemplateComponent } from './pages/print-template/print-template.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditPaymentComponent } from './pages/edit-payment/edit-payment.componen
     SearchMemberComponent,
     PaymentComponent,
     MemberComponent,
-    EditPaymentComponent
+    EditPaymentComponent,
+    PrintTemplateComponent
   ],
   imports: [
     BrowserModule,

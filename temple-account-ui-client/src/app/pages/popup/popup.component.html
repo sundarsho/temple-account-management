@@ -17,6 +17,9 @@
         <mat-label>Gender</mat-label>
         <input matInput [(ngModel)]="member.gender" formControlName="gender" readonly>
        </mat-form-field>
+        <div>
+        <mat-checkbox [(ngModel)]="statusInd" formControlName="statusInd">Is Active</mat-checkbox>
+       </div>
        <mat-form-field>
         <mat-label>Street Address1</mat-label>
         <input matInput [(ngModel)]="member.streetAddress1" formControlName="streetAddress1">
@@ -53,14 +56,10 @@
         <mat-label>Email Id</mat-label>
         <input matInput [(ngModel)]="member.emailId" formControlName="emailId">
        </mat-form-field>
-       <mat-form-field>
+       <mat-form-field class="mat-50">
         <mat-label>Notes</mat-label>
         <textarea matInput [(ngModel)]="member.notes" formControlName="notes"></textarea>
-        <!-- <input matInput [(ngModel)]="member.notes" formControlName="notes"> -->
-       </mat-form-field>
-       <!-- <div>
-        <mat-checkbox formControlName="status">Is Active</mat-checkbox>
-       </div> -->
+       </mat-form-field>      
     </div>
     <div mat-dialog-actions>
         <button mat-raised-button type="submit" color="primary">Save</button>

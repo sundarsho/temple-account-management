@@ -3,6 +3,7 @@ export interface Member {
     name: string;
     fatherName: string;
     gender: string;
+    status: string;
     streetAddress1: string;
     streetAddress2: string;
     city: string;
@@ -54,6 +55,8 @@ export interface Payment {
     financialYear: string;
     paymentDate: Date;
     paymentMode: string;
+    comments: string;
+    receivedBy: string;
     createdDt: Date;
     createdBy: string;
     updatedDt: Date;

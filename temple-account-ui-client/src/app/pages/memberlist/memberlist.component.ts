@@ -21,7 +21,7 @@ export class MemberlistComponent implements OnInit {
   memberlist !: Member[];
   dataSource: any;
   dataSourceExport: any;
-  displayedColumns: string[] = ["edit", "memberId", "name", "fatherName", "gender", "Address",
+  displayedColumns: string[] = ["edit", "memberId", "name", "fatherName", "gender", "status", "Address",
    "city","state", "phone", "whatsApp","emailId", "notes"];
 
   @ViewChild(MatPaginator) paginatior !: MatPaginator;

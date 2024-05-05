@@ -89,7 +89,16 @@
      <mat-form-field>
       <mat-label>Payment Amount</mat-label>
       <input formControlName="paymentAmount" type="number" matInput>
-     </mat-form-field>         
+     </mat-form-field>   
+     <mat-form-field>
+      <mat-label>Received By</mat-label>
+      <input formControlName="receivedBy" matInput>
+     </mat-form-field>     
+     <mat-form-field>
+      <mat-label>Comments</mat-label>
+      <!-- <input matInput> -->
+      <textarea matInput formControlName="comments"></textarea>
+  </mat-form-field> 
   </div>
   <div mat-actions>
       <button mat-raised-button type="submit" color="primary">Pay</button>
@@ -169,7 +178,17 @@
     <ng-container matColumnDef="paymentMode">
       <th mat-sort-header mat-header-cell *matHeaderCellDef> Payment Mode</th>
       <td mat-cell *matCellDef="let element">{{element.paymentMode}}</td>
-    </ng-container>        
+    </ng-container>      
+    
+    <ng-container matColumnDef="receivedBy">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Received By</th>
+      <td mat-cell *matCellDef="let element">{{element.receivedBy}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="comments">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Comments</th>
+      <td mat-cell *matCellDef="let element">{{element.comments}}</td>
+    </ng-container> 
     
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>

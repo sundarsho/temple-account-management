@@ -30,7 +30,9 @@ export class EditPaymentComponent {
         paymentType: new FormControl(''),
         paymentMode: new FormControl(''),
         paymentAmount: new FormControl(''),
-        financialYear: new FormControl('')
+        financialYear: new FormControl(''),
+        receivedBy: new FormControl(''),
+        comments: new FormControl('')
       });  
   }
 
@@ -62,7 +64,9 @@ export class EditPaymentComponent {
         paymentType: this.currentPaymentData.paymentType,
         paymentMode: this.currentPaymentData.paymentMode,
         paymentAmount: this.currentPaymentData.paymentAmount,
-        financialYear: this.currentPaymentData.financialYear
+        financialYear: this.currentPaymentData.financialYear,
+        receivedBy: this.currentPaymentData.receivedBy,
+        comments: this.currentPaymentData.comments
       }
 
       this.payment.paymentDate = this.formatDate(this.payment.paymentDate);

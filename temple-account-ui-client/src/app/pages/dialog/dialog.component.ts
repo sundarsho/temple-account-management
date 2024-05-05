@@ -1,7 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MasterService } from '../../services/master.service';
 import { Member, Payment } from '../../models/temple.model';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dialog-component',
@@ -12,11 +15,16 @@ export class DialogComponent {
 
   currentMemberData!: Member;
   member!: Member;
+  memberDetails!: any;
 
   pageTitle: any;
+  pagePrint: any;
 
   currentPaymentData!: Payment;
   payment!: Payment;
+
+  @ViewChild('printContent')
+  el!: ElementRef;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<DialogComponent>,
     private service: MasterService) {
@@ -39,10 +47,20 @@ export class DialogComponent {
           receiptNo: this.currentPaymentData.receiptNo,
           occasionDesc: this.currentPaymentData.occasionDesc
         }
+      }else if(this.data.title == 'ViewPayment'){
+        this.memberDetails = this.data.memberDetails
+        this.currentPaymentData = this.data.rowdata;
+        this.payment = <Payment>{
+          paymentId: this.currentPaymentData.paymentId,
+          receiptNo: this.currentPaymentData.receiptNo,
+          occasionDesc: this.currentPaymentData.occasionDesc,
+          paymentType: this.currentPaymentData.paymentType,
+          paymentDate: this.currentPaymentData.paymentDate,
+          paymentMode: this.currentPaymentData.paymentMode,
+          paymentAmount: this.currentPaymentData.paymentAmount,
+          financialYear: this.currentPaymentData.financialYear
+        }
       }
-
-      
-
   }
 
   deleteMember(memberId: any) {
@@ -57,11 +75,10 @@ export class DialogComponent {
       console.log("Payment Deleted Successfully.");
     });
     this.closepopup();
-}
+  }
 
   closepopup() {
     this.ref.close('Closed using function');
   }
-
 
 }

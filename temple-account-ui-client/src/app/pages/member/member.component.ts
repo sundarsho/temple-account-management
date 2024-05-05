@@ -16,14 +16,11 @@ export class MemberComponent {
 
   closemessage = 'closed using directive'
 
-  countrylist=['India','USA','Singapore','UK']
-  termlist=['15days','30days','45days','60days']
-
   constructor(private service: MasterService, private _snackBar: MatSnackBar) {
     this.memberform = new FormGroup({
       name: new FormControl(''),
       fatherName: new FormControl(''),
-      gender: new FormControl(''),
+      gender: new FormControl('Male'),
       streetAddress1: new FormControl(''),
       streetAddress2: new FormControl(''),
       city: new FormControl(''),
@@ -33,7 +30,8 @@ export class MemberComponent {
       phone: new FormControl(''),
       whatsApp: new FormControl(''),
       emailId: new FormControl(''),
-      notes: new FormControl('')
+      notes: new FormControl(''),
+      status:new FormControl(true),
     });
 
   }
@@ -45,6 +43,7 @@ export class MemberComponent {
 
   saveMember() {
     if(this.memberform.dirty){
+      this.memberform.value.status = 'Active';
       this.service.saveMember(this.memberform.value).subscribe(data => {
         this.member = data;
         this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")

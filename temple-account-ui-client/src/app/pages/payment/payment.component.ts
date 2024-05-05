@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditPaymentComponent } from '../edit-payment/edit-payment.component';
+import { PrintTemplateComponent } from '../print-template/print-template.component';
 
 @Component({
   selector: 'app-payment',
@@ -34,7 +35,7 @@ export class PaymentComponent implements OnInit{
   serializedDate = new FormControl(new Date().toISOString());
 
   displayedColumns: string[] = ["Action", "paymentId", "receiptNo",
-  "occasionDesc","paymentType", "paymentAmount", "financialYear", "paymentDate","paymentMode"];
+  "occasionDesc","paymentType", "paymentAmount", "financialYear", "paymentDate","paymentMode", "receivedBy", "comments"];
 
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
@@ -49,7 +50,9 @@ export class PaymentComponent implements OnInit{
       paymentType: new FormControl(''),
       paymentMode: new FormControl(''),
       paymentAmount: new FormControl(''),
-      financialYear: new FormControl('')
+      financialYear: new FormControl(''),
+      receivedBy: new FormControl(''),
+      comments: new FormControl('')
     });    
 
     this.memberform = new FormGroup({
@@ -121,7 +124,7 @@ export class PaymentComponent implements OnInit{
         this.payment = data;
         //this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")
         this.loadPayments(this.memberDetails?.memberId);
-
+        this.OpenDialog(this.payment, 'ViewPayment', DialogComponent);
         console.log("Payment Added Successfully");
       });
     }
@@ -157,7 +160,7 @@ export class PaymentComponent implements OnInit{
   }
   
   printPayment(element: Payment) {
-    //this.OpenEditPayment(element, 'Edit Payment', EditPaymentComponent);
+    this.OpenDialog(element, 'ViewPayment', PrintTemplateComponent);
   }
 
   OpenEditPayment(payment: any, title: any,component:any) {
@@ -178,10 +181,11 @@ export class PaymentComponent implements OnInit{
 
   OpenDialog(payment: any, title: any,component:any) {
     var _popup = this.dialog.open(component, {
-      width: '26%',
+      width: '80%',
       enterAnimationDuration: '10ms',
       exitAnimationDuration: '300ms',
       data: {
+        memberDetails: this.memberDetails,
         title: title,
         rowdata: payment
       }
@@ -221,5 +225,7 @@ exportPayment(memberId:any){
   clearform(){
     this.paymentform.reset();
   }
+
+
 
 }

@@ -1,0 +1,109 @@
+button {
+    margin-right: 8px;
+  }
+
+
+  .showDetails p{
+    color: #005ee6;
+    font-weight: bold;
+    position: relative;
+    line-height: 0.5;
+}
+
+.mat-label {
+    font-size: 16px; /* Font size */
+    color: #666; /* Text color */
+    display: block;
+    margin-bottom: 5px;
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  a {
+    color: #5D6975;
+    text-decoration: underline;
+  }
+  
+  .content {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+.details{
+  font-size: 15px;
+  font-family: VANAVILAvvaiyar_9;
+  color: #4AA5FA;
+  -webkit-text-stroke: 0.5px #4AA5FA;
+  white-space: nowrap;
+}
+  
+  header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+  }
+    
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  h4{
+    text-align: center;
+    font-size: 10px;
+    margin: 0 0 2px 0;
+    font-family: VANAVILAvvaiyar_9;
+    color: #4AA5FA;
+    line-height: 1;
+  }
+    
+  h1 {
+    /* line-height: 1.4em; */
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 5px 0;
+    /* background: url(dimension.png); */
+    font-size: 28px;
+    font-family: VANAVILAvvaiyar_9;
+    color: #F732C2;
+}
+
+h3 {
+  font-size: 23px;
+  font-family: VANAVILAvvaiyar_9;
+  color: #FF4C33;
+  text-align: center;
+  margin: 0 0 10px 0;
+}  
+  
+  #project {
+    float: left;
+  }
+  
+  /* #project span {
+    color: #5D6975;
+    text-align: right;
+    width: 52px;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 0.8em;
+  } */
+  
+  #member {
+    float: right;
+    text-align: right;
+  }
+  
+  #project div,
+  #member div {
+    white-space: nowrap;        
+  }
+  
+  table {
+    width: 100%;
+    border: #5D6975;
+  }
+  

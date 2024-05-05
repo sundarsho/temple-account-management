@@ -6,6 +6,10 @@
         <input [(ngModel)]="payment.paymentId" formControlName="paymentId" matInput readonly >
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Receipt No</mat-label>
+      <input [(ngModel)]="payment.receiptNo" formControlName="receiptNo" matInput readonly >
+  </mat-form-field>
+    <mat-form-field>
         <mat-label>Member Id</mat-label>
         <input [(ngModel)]="memberDetails.memberId" formControlName="memberId" matInput readonly >
     </mat-form-field>
@@ -51,7 +55,15 @@
        <mat-form-field>
         <mat-label>Payment Amount</mat-label>
         <input [(ngModel)]="payment.paymentAmount"  formControlName="paymentAmount" type="number" matInput>
-       </mat-form-field>         
+       </mat-form-field>    
+       <mat-form-field>
+        <mat-label>Received By</mat-label>
+        <input [(ngModel)]="payment.receivedBy" formControlName="receivedBy" matInput >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Comments</mat-label>
+      <input [(ngModel)]="payment.comments" formControlName="comments" matInput >
+  </mat-form-field>   
     </div>
     <div mat-dialog-actions>
         <button mat-raised-button type="submit" color="primary">Save</button>

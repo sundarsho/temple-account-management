@@ -7,3 +7,9 @@
 button{
     margin: 5px;
 }
+
+.mat-50{
+    width: 35%;
+    height: 100px;
+    margin: 1%;
+}

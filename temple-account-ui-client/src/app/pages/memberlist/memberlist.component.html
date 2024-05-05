@@ -45,6 +45,11 @@
         <td mat-cell *matCellDef="let element">{{element.gender}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="status">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+      </ng-container>
+
       <ng-container matColumnDef="Address">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
         <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
