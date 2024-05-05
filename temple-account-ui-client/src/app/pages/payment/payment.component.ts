@@ -124,7 +124,7 @@ export class PaymentComponent implements OnInit{
         this.payment = data;
         //this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")
         this.loadPayments(this.memberDetails?.memberId);
-        this.OpenDialog(this.payment, 'ViewPayment', DialogComponent);
+        this.printPayment(this.payment);
         console.log("Payment Added Successfully");
       });
     }

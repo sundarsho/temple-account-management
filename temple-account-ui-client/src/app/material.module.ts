@@ -20,6 +20,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
         MatDatepickerModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         MatInputModule,
@@ -64,7 +66,8 @@ import {provideNativeDateAdapter} from '@angular/material/core';
         MatDatepickerModule,
         MatAutocompleteModule,
         MatFormFieldModule,
-        MatSnackBarModule            
+        MatSnackBarModule,
+        MatProgressSpinnerModule            
     ],
     declarations: [],
     providers: [provideNativeDateAdapter()]

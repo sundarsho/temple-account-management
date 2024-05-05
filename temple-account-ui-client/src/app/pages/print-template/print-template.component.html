@@ -9,9 +9,12 @@
             <h4>உ</h4>  
             <h4>ஸ்ரீ கன்னி விநாயகர் துணை</h4>    
             <h1>ஸ்ரீ பெரியபிள்ளை அம்மன் கோவில்</h1>
-            <h4>புங்கவர்நத்தம்</h4>              
-            <h3>நன்கொடை ரசீது</h3>
+            <h4>புங்கவர்நத்தம்</h4>
 
+            <h3 *ngIf="payment.paymentType=='Donation'">நன்கொடை ரசீது</h3>
+            <h3 *ngIf="payment.paymentType=='Tax'">தலைகட்டு வரி ரசீது</h3>
+            <h3 *ngIf="payment.paymentType=='Poojai'">பூஜை ரசீது</h3>
+            
             <div id="member" class="clearfix">
               <div><span class="details">
                 கட்டணம் தேதி: </span> <b>{{payment.paymentDate | date: 'dd/MM/yyyy'}}</b></div>
@@ -62,8 +65,12 @@
       </div>
 
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions >
   <button mat-raised-button (click)="printPayment(payment.paymentId)" color="primary">Print</button>
     <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+</div>
+<div *ngIf="isLoading">
+  <!-- Loading spinner or loading indicator -->
+  <mat-spinner></mat-spinner>
 </div>
 </ng-container>

@@ -12,7 +12,7 @@ import { MasterService } from '../../services/master.service';
   styleUrl: './print-template.component.css'
 })
 export class PrintTemplateComponent {
-
+  isLoading: boolean = false;
   currentMemberData!: Member;
   member!: Member;
   memberDetails!: any;
@@ -51,7 +51,9 @@ export class PrintTemplateComponent {
 }
 
   printPayment(paymentId: any) { 
+    this.isLoading = true;
     this.generatePDF(paymentId);
+    this.closepopup();
   }
 
   closepopup() {
@@ -59,8 +61,8 @@ export class PrintTemplateComponent {
   }
 
   generatePDF(paymentId: any) {
-    this.el.nativeElement.style.display='block';
-     console.log(this.el.nativeElement);
+    // this.el.nativeElement.style.display='block';
+    //  console.log(this.el.nativeElement);
      const element: any = document.getElementById('printContent'); 
     
     html2canvas(element).then((canvas) => {
@@ -72,8 +74,9 @@ export class PrintTemplateComponent {
       pdf.addImage(imgData, 'PNG', 0.25, 0, pdfWidth, pdfHeight);
       let fileName = 'Receipt_'+paymentId+'_'+this.memberDetails.memberId+'.pdf';
       pdf.save(fileName);
-
+      this.isLoading = false;
     });
+    
 
 }
 }
