@@ -67,7 +67,8 @@ export class PrintTemplateComponent {
     
     html2canvas(element).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p','px','a4');
+      //const pdf = new jspdf('p','px','a4');
+      const pdf = new jspdf('l','px','a4');
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
