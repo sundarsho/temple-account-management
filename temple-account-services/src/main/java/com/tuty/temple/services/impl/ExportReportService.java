@@ -1,6 +1,5 @@
 package com.tuty.temple.services.impl;
 
-import com.tuty.temple.entities.Member;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -55,24 +54,31 @@ public class ExportReportService {
 
     private void writeHeader(FileWriter writer, Field[] fields, List<String> ignoreFields) throws IOException {
         // Write CSV header
+        boolean isIgnoredField = false;
         for (int i = 0; i < fields.length; i++) {
-            boolean isIgnoredField = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
+            if(ignoreFields!=null){
+                isIgnoredField = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
+            }
+
             if(!isIgnoredField){
                 writer.append(splitCamelCase(fields[i].getName()));
                 if (i < fields.length - 1) {
                     writer.append(",");
                 }
             }
-
         }
         writer.append("\n");
     }
 
     private <T> void writeDataRow(FileWriter writer, T obj, Field[] fields, List<String> ignoreFields) throws IOException {
         // Write data row dynamically based on the fields
+        boolean isIgnoredField = false;
         for (int i = 0; i < fields.length; i++) {
-            boolean isIgnored = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
-            if(!isIgnored){
+            if(ignoreFields!=null){
+                isIgnoredField = ignoreFields.stream().anyMatch(fields[i].getName()::equalsIgnoreCase);
+            }
+
+            if(!isIgnoredField){
                 fields[i].setAccessible(true);
                 Object value = ReflectionUtils.getField(fields[i], obj);
                 writer.append(String.valueOf(value));

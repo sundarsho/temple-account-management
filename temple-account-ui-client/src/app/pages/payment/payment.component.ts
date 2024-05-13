@@ -224,6 +224,7 @@ exportPayment(memberId:any){
 
   clearform(){
     this.paymentform.reset();
+    this.resetDataSource();
   }
 
 

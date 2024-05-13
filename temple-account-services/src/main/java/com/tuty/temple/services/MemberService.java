@@ -14,9 +14,8 @@ public interface MemberService {
     Member saveMember(Member member);
     void deleteMember(Long memberId);
     List<Member> searchMember(MemberSearchFilter memberSearchFilter);
-
     ResponseEntity<byte[]> exportMemberDetails(HttpServletResponse response);
-
+    ResponseEntity<byte[]> searchMemberExport(MemberSearchFilter memberSearchFilter, HttpServletResponse response);
 
 
 }

@@ -1,0 +1,41 @@
+td { white-space:pre }
+
+.mat-mdc-row:hover {
+    background-color: aliceblue !important
+  }
+
+.mdc-data-table__cell, .mdc-data-table__header-cell{
+  padding: 0 6px 0 6px;
+}
+
+.space {
+  margin-right: 15px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%
+ }
+
+ button{
+    margin: 5px;
+}
+
+.mat-mdc-form-field {
+  width: 15%;
+  height: 70px;
+  margin: 1%;
+}
+
+.mat-50{
+  width: 30%;
+  margin: 1%;
+}

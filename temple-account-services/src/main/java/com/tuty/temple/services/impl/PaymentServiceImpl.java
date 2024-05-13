@@ -76,18 +76,17 @@ public class PaymentServiceImpl implements PaymentService {
     @GetMapping("/payment/export")
     public ResponseEntity<byte[]> exportPayment(PaymentSearchFilter paymentSearchFilter, HttpServletResponse response) {
         String fileName = "export_Payment_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
-        List<String> ignoreFields = Arrays.asList("Member");
+        List<String> ignoreFields = Arrays.asList("streetAddress1","streetAddress2","state","zipCode",
+                "whatsApp", "status", "notes", "createdDt", "createdBy", "updatedDt", "updatedBy");
         try{
 
             List<Payment> payments = searchPayment(paymentSearchFilter);
             // Export data to CSV
             byte[] byteArray = exportReportService.exportToCSV(fileName, payments, Payment.class, ignoreFields);
 
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             headers.setContentDispositionFormData("attachment", fileName);
-
             // Return the exported file as a byte array
             return new ResponseEntity<>(byteArray, headers, HttpStatus.OK);
         } catch(IOException e) {

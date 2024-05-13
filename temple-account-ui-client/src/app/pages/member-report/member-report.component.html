@@ -1,0 +1,116 @@
+<mat-card>
+    <mat-card-header>
+
+  <form [formGroup]="memberSearchform" (ngSubmit)="searchMember()">
+    <h1 mat-dialog-title>Member Report</h1>
+    <div mat-content>     
+       <mat-form-field>
+        <mat-label>Member Id</mat-label>
+        <input formControlName="memberId" matInput>
+       </mat-form-field> 
+       <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Father Name</mat-label>
+        <input formControlName="fatherName" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>City</mat-label>
+        <input formControlName="city" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Ancestor Village</mat-label>
+        <input formControlName="ancestorVillage" matInput>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input formControlName="phone" matInput>
+       </mat-form-field>
+        <mat-radio-group formControlName="gender" color="primary">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+        <!-- <mat-checkbox formControlName="status" color="warn">Is Active</mat-checkbox> -->
+        
+    </div>
+    <div mat-actions>
+        <button mat-raised-button type="submit" color="primary">Search</button>
+        <a (click)="clearform()" mat-raised-button color="warn">Reset</a>
+        <button (click)="exportAllMembers()" mat-raised-button color="primary">Export All 
+            <mat-icon>download</mat-icon> 
+        </button>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+    </div>
+  </form>
+  </mat-card-header>
+  <br/>
+    <mat-card-content>
+
+<mat-card-header>    
+    <span class="spacer"></span>       
+        <button (click)="exportMembers(params)" mat-raised-button color="primary">Export to CSV 
+        <mat-icon>download</mat-icon> 
+        </button>
+    </mat-card-header>
+    
+<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="memberId" matSortDirection="asc" matSortDisableClear>
+    
+    <ng-container matColumnDef="memberId">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> MemberId</th>
+      <td mat-cell *matCellDef="let element">{{element.memberId}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef > Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fatherName">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Father Name</th>
+        <td mat-cell *matCellDef="let element">{{element.fatherName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Gender</th>
+        <td mat-cell *matCellDef="let element">{{element.gender}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Address">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
+        <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> city</th>
+        <td mat-cell *matCellDef="let element">{{element.city}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="zipCode">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> zipCode</th>
+        <td mat-cell *matCellDef="let element">{{element.zipCode}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ancestorVillage">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> ancestorVillage</th>
+        <td mat-cell *matCellDef="let element">{{element.ancestorVillage}}</td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-sort-header mat-header-cell *matHeaderCellDef> phone</th>
+        <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+      </ng-container>     
+      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
+
+</table>
+
+</mat-card-content>
+<br>
+<mat-card-footer>
+
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+</mat-card-footer>
+</mat-card>

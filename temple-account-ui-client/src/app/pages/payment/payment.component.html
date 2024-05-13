@@ -137,7 +137,7 @@
 
     <ng-container matColumnDef="paymentAmount">
       <th mat-sort-header mat-header-cell *matHeaderCellDef> Amount</th>
-      <td mat-cell *matCellDef="let element">{{element.paymentAmount}} <pre>{{element.streetAddress2}}</pre></td>
+      <td mat-cell *matCellDef="let element">₹{{element.paymentAmount}}</td>
     </ng-container>
 
     <ng-container matColumnDef="financialYear">

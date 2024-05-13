@@ -42,6 +42,7 @@ export interface SearchPaymentQuery {
     financialYear: string;
     paymentDate: Date;
     paymentMode: string;
+    receivedBy: string;
 }
 
 export interface Payment {

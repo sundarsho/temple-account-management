@@ -26,6 +26,9 @@ import { MemberComponent } from './pages/member/member.component';
 import { EditPaymentComponent } from './pages/edit-payment/edit-payment.component';
 import { PrintTemplateComponent } from './pages/print-template/print-template.component';
 import { AmountInWordsPipe } from './services/amount-in-words';
+import { PaymentReportComponent } from './pages/payment-report/payment-report.component';
+import { MemberReportComponent } from './pages/member-report/member-report.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { AmountInWordsPipe } from './services/amount-in-words';
     MemberComponent,
     EditPaymentComponent,
     PrintTemplateComponent,
-    AmountInWordsPipe
+    AmountInWordsPipe,
+    PaymentReportComponent,
+    MemberReportComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { AmountInWordsPipe } from './services/amount-in-words';
     MatFormFieldModule    
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

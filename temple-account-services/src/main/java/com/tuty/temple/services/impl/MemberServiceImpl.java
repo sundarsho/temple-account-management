@@ -77,28 +77,42 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @GetMapping("/member/search/export")
+    public ResponseEntity<byte[]> searchMemberExport(@ParameterObject MemberSearchFilter memberSearchFilter, HttpServletResponse response) {
+        try{
+            List<Member> members = memberRepository.findAll(memberSearchFilter.toSpecification());
+            String fileName = "export_member_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
+            byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class, null);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", fileName);
+            return new ResponseEntity<>(byteArray, headers, HttpStatus.OK);
+        } catch(IOException e) {
+            // Handle export errors
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
     @GetMapping("/member/export")
     public ResponseEntity<byte[]> exportMemberDetails(HttpServletResponse response) {
         String fileName = "export_member_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
         try{
+            List<Member> members = memberRepository.findAll();
+            // Export data to CSV
+            byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class, null);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", fileName);
 
-        List<Member> members = memberRepository.findAll();
-        // Export data to CSV
-        byte[] byteArray = exportReportService.exportToCSV(fileName, members, Member.class, null);
+            // Return the exported file as a byte array
+            return new ResponseEntity<>(byteArray, headers, HttpStatus.OK);
+        } catch(IOException e) {
+            // Handle export errors
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", fileName);
-
-        // Return the exported file as a byte array
-        return new ResponseEntity<>(byteArray, headers, HttpStatus.OK);
-    } catch(IOException e) {
-        // Handle export errors
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-}
 
 
 }

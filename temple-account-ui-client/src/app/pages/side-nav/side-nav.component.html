@@ -60,6 +60,26 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
             </mat-accordion>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon>dashboard</mat-icon>
+                            <span class="side-nav-item-title">Reports</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <mat-list-item class="side-nav-item" routerLink="memberReport">
+                            <button mat-button><mat-icon>supervisor_account</mat-icon>Members Report</button>
+                        </mat-list-item>
+                        <mat-list-item class="side-nav-item" routerLink="paymentReport">
+                            <button mat-button><mat-icon>payment</mat-icon>Payment Report</button>
+                            <!-- <mat-icon class="side-nav-icon">payment</mat-icon>
+                            <span class="side-nav-item-title">Payment</span> -->
+                        </mat-list-item>                        
+                    </mat-nav-list>
+                </mat-expansion-panel>
+            </mat-accordion>
             <mat-list-item>
                 <button mat-button><mat-icon>settings</mat-icon> Maintenance</button>
             </mat-list-item>

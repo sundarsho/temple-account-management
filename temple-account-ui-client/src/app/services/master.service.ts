@@ -56,6 +56,9 @@ export class MasterService {
     return this.http.delete(this.baseUrl+"/payment/delete?paymentId="+paymentId);
   }
 
+  exportSearchMembersToCsv(params: HttpParams):Observable<Blob>{
+      return this.http.get(this.baseUrl+"/member/search/export?"+params.toString(), { responseType: 'blob' });        
+  }
 
   exportMembersToCsv(): Observable<Blob> {
     return this.http.get(this.baseUrl+"/member/export", { responseType: 'blob' });
