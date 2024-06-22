@@ -2,6 +2,7 @@ package com.tuty.temple.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tuty.temple.field.FieldMetadata;
 import com.tuty.temple.model.OccasionEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,11 +46,13 @@ public class Payment {
     @Column(name = "RECEIPT_NO")
     private Long receiptNo;
 
+    @FieldMetadata(groupable = true)
     @Column(name = "OCCASION_CD")
     private String occasionCd;
 
     @Transient
     @JsonProperty("occasionDesc")
+    @FieldMetadata(groupable = true)
     public String getOccasionDesc() {
         if (this.occasionCd == null) {
             return null;
@@ -62,18 +65,22 @@ public class Payment {
         return null;
     }
 
+    @FieldMetadata(groupable = true)
     @Column(name="PAYMENT_TYPE")
     private String paymentType;
 
     @Column(name="PAYMENT_AMOUNT")
     private BigDecimal paymentAmount;
 
+    @FieldMetadata(groupable = true)
     @Column(name="FINANCIAL_YEAR")
     private String financialYear;
 
+    @FieldMetadata(groupable = true)
     @Column(name="PAYMENT_DATE")
     private LocalDate paymentDate;
 
+    @FieldMetadata(groupable = true)
     @Column(name="PAYMENT_MODE")
     private String paymentMode;
 
@@ -81,6 +88,7 @@ public class Payment {
     @Column(name="COMMENTS")
     private String comments;
 
+    @FieldMetadata(groupable = true)
     @Column(name="RECEIVED_BY")
     private String receivedBy;
 

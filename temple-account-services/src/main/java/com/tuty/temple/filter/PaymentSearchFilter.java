@@ -68,6 +68,7 @@ public class PaymentSearchFilter {
                 predicates.add(criteriaBuilder.equal(root.get("receiptNo"), receiptNo));
             }
 
+            
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 

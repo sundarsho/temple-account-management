@@ -1,5 +1,6 @@
 package com.tuty.temple.config;
 
+import com.tuty.temple.repositories.CustomJpaRepository;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EntityScan({"com.tuty.temple.entities"})
-@EnableJpaRepositories("com.tuty.temple.repositories")
+@EnableJpaRepositories(value = "com.tuty.temple.repositories", repositoryBaseClass = CustomJpaRepository.class)
 public class DataSourceConfig {
 
 

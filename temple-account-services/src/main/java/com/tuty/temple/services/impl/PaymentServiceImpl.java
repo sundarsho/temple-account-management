@@ -1,9 +1,11 @@
 package com.tuty.temple.services.impl;
 
 import com.tuty.temple.entities.Payment;
+import com.tuty.temple.field.FieldMetadata;
 import com.tuty.temple.filter.PaymentSearchFilter;
 import com.tuty.temple.repositories.PaymentRepository;
 import com.tuty.temple.services.PaymentService;
+import com.tuty.temple.util.CommonUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 @RestController
 @Slf4j
@@ -93,6 +99,15 @@ public class PaymentServiceImpl implements PaymentService {
             // Handle export errors
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/payment/group-fields")
+    public List<String> findPaymentGroupFields(){
+        Field[] fields = Payment.class.getDeclaredFields();
+        return Arrays.stream(fields)
+                .filter(f -> CommonUtils.getAnnotation(f, FieldMetadata.class) != null)
+                .map(Field::getName)
+                .collect(Collectors.toList());
     }
 
 
