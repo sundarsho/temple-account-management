@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IncomeExpenseService {
 
-    List<GroupSummaryStatistics> incomeGroupBy(@RequestParam String field, @RequestParam String aggregation, PaymentSearchFilter paymentSearchFilter);
+    List<GroupSummaryStatistics> incomeGroupBy(PaymentSearchFilter paymentSearchFilter);
 
 }

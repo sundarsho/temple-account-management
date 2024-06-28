@@ -31,23 +31,23 @@ public class CustomJpaRepository<T,ID> extends SimpleJpaRepository<T, ID>
     }
 
     @Override
-    public List<GroupSummaryStatistics> groupBy(String field, String aggregation, String aggregationField, Specification<T> spec) {
-        Assert.hasText(field, "Field name cannot be null/empty");
+    public List<GroupSummaryStatistics> groupBy(String groupBy, String aggregation, String aggregationField, Specification<T> spec) {
+        Assert.hasText(groupBy, "Field name cannot be null/empty");
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root<T> root = query.from(getDomainClass());
         query.multiselect(
-                root.get(field),
+                root.get(groupBy),
                 builder.count(root),
                 builder.sum(root.get(aggregationField))
         );
         query.where(CommonUtils.applySpec(spec, root, query, builder));
-        query.groupBy(root.get(field));
-        query.orderBy(builder.asc(root.get(field)));
+        query.groupBy(root.get(groupBy));
+        query.orderBy(builder.asc(root.get(groupBy)));
         List<Object[]> results = entityManager.createQuery(query).getResultList();
         return results.stream().map(r -> GroupSummaryStatistics.builder()
-                .fieldName(field)
-                .value(r[0].toString())
+                .fieldName(groupBy)
+                .value(r[0])
                 .count((Long) r[1])
                 .sum(r[2]!=null? (BigDecimal) r[2]: null)
                 .build()).collect(Collectors.toList());

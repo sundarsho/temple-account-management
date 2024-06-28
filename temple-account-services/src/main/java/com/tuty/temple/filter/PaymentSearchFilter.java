@@ -29,6 +29,10 @@ public class PaymentSearchFilter {
     private String financialYear;
     private LocalDate paymentDate;
     private String paymentMode;
+    private String groupByField;
+    private String aggregationType;
+    private String aggregationField;
+
 
     public Specification<Payment> toSpecification(){
         return (root, query, criteriaBuilder) -> {
