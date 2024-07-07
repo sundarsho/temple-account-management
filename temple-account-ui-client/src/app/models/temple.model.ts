@@ -43,6 +43,9 @@ export interface SearchPaymentQuery {
     paymentDate: Date;
     paymentMode: string;
     receivedBy: string;
+    groupByField: string;
+    aggregationType: string;
+    aggregationField: string;
 }
 
 export interface Payment {
@@ -69,4 +72,27 @@ export interface Occasion {
     viewValue: string;
   }
 
+  export interface GroupBy {
+    value: string;
+    viewValue: string;
+  }
+
+  export interface GroupSummaryStatistics {
+    groupBy: string;
+    description: string;
+    count: number;
+    sum: number;
+    value: any;
+  }
+
+  export class QueryParams {
+    public static readonly DEFAULT_GROUP_BY_FIELD : string = 'paymentType';
+    groupByField: string = QueryParams.DEFAULT_GROUP_BY_FIELD;  
+  }
+
+  export class FieldDescriptor {
+    name!: string;
+    displayName!: string;   
+    
+  }
 

@@ -1,0 +1,74 @@
+.dashboard {
+    padding: 10px 0px 120px;
+}
+
+.dashboard-left{
+    width: 50vw;
+    padding: 20px 15px 0px 30px;
+}
+
+.dashboard-right{
+    width: 50vw;
+    padding: 20px 15px 0px 30px;
+}
+
+@media screen and (max-width: 1279px) {
+    .dashboard-left{
+        width: 99vw;
+        height: 55vh;
+        padding: 30px;
+    }
+
+    .dashboard-right{
+        width: 99vw;
+        height: 70vh;
+        padding: 30px;
+    }    
+}
+
+.pie-chart{
+    position: relative;
+}
+
+.mat-chip-list-wrapper{
+    display:inline;
+}
+
+.chip-list{
+    width: 40vw;
+}
+
+.filter-dialog{
+    overflow-y: hidden;
+}
+
+.mat-mdc-row:hover {
+    background-color: aliceblue !important
+  }
+
+.space {
+  margin-right: 15px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+ button{
+    margin: 5px;
+}
+
+.mat-mdc-form-field {
+  width: 15%;
+  height: 70px;
+  margin: 1%;
+}
+
+.mat-50{
+    width: 20%;
+    margin: 1%;
+}

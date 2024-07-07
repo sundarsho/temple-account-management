@@ -1,0 +1,37 @@
+<div class="pie-chart-card">
+
+    <mat-progress-bar [ngClass]="{'visibility-hidden': !loading}" mode="indeterminate"></mat-progress-bar>
+    <mat-card class="mat-elevation-z3 pie-chart-card">
+        <span class="card-title" matTooltip="Click on a Section of the pie chart"></span>
+         <mat-form-field>
+            <mat-label>groupBy Field</mat-label>    
+            <mat-select matInput [(ngModel)]="groupByField"
+                        (selectionChange)="changeValue(groupByField)"
+                        placeholder="Group Data By:"
+                        hintLabel="Group Data By:">
+                @for (field of fields; track field) {
+                    <mat-option [value]="field.value">{{field.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <div class="pie-chart-container" style="display: grid">
+            <ngx-charts-pie-chart
+                style="margin-top: 10px"
+                (window:resize)="onResize()"
+                [results]="pieChartData"
+                [gradient]="gradient"
+                [gradient]="true"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"                
+                [view]="view"
+                [scheme]="colorScheme"
+                [legend]="showLegend"
+                [doughnut]="false"
+                (explodeSlices)="false"
+                [labels]="true"
+                >
+            </ngx-charts-pie-chart>
+        </div>
+    </mat-card>
+</div>

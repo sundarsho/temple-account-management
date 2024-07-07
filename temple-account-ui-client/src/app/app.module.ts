@@ -29,6 +29,9 @@ import { AmountInWordsPipe } from './services/amount-in-words';
 import { PaymentReportComponent } from './pages/payment-report/payment-report.component';
 import { MemberReportComponent } from './pages/member-report/member-report.component';
 import { DatePipe } from '@angular/common';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PieChartComponent } from './pages/pie-chart/pie-chart.component';
+import { IncomeReportComponent } from './pages/income-report/income-report.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { DatePipe } from '@angular/common';
     PrintTemplateComponent,
     AmountInWordsPipe,
     PaymentReportComponent,
-    MemberReportComponent
+    MemberReportComponent,
+    PieChartComponent,
+    IncomeReportComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,8 @@ import { DatePipe } from '@angular/common';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule    
+    MatFormFieldModule,
+    NgxChartsModule    
   ],
   providers: [
     provideAnimationsAsync(),

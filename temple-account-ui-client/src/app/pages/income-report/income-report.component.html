@@ -1,0 +1,39 @@
+<div class="dashboard">
+  
+    <h1 mat-dialog-title>Income Report</h1>     
+<mat-form-field>
+    <mat-label>Financial Year</mat-label>  
+    <mat-select matInput [(ngModel)]="financialYear"
+                (selectionChange)="changeFinancialValue(financialYear)"
+                placeholder="Financial Year"
+                hintLabel="Financial Year:">
+        @for (item of financialYearList; track item) {
+            <mat-option [value]="item">{{item}}</mat-option>
+        }
+    </mat-select>     
+  </mat-form-field>
+<mat-form-field>
+    <mat-label>Payment Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [max]="today" (dateChange)="onDateSelected($event)" >
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-card-header>  
+    <span class="spacer"></span>       
+      <button mat-raised-button color="primary">Export to CSV 
+        <mat-icon>download</mat-icon> 
+      </button>
+  </mat-card-header>
+
+    <div fxLayout fxLayout.lt-lg="column">
+        <app-pie-chart
+            [pieChartData]="pieChartData"
+            [loading]="pieChartLoading"
+            [groupByField]="groupByField"
+            (chartClicked)="openExportSheet($event)">
+        </app-pie-chart>
+    </div>
+    
+</div>

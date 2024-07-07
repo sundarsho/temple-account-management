@@ -7,6 +7,7 @@ import { MemberComponent } from './pages/member/member.component';
 import { MemberlistComponent } from './pages/memberlist/memberlist.component';
 import { PaymentReportComponent } from './pages/payment-report/payment-report.component';
 import { MemberReportComponent } from './pages/member-report/member-report.component';
+import { IncomeReportComponent } from './pages/income-report/income-report.component';
 
 const routes: Routes = [
   {path:'memberlist',component: MemberlistComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'searchMember',component:SearchMemberComponent},
   {path:'payment',component:PaymentComponent},
   {path:'paymentReport',component:PaymentReportComponent},
-  {path:'memberReport',component:MemberReportComponent}
+  {path:'memberReport',component:MemberReportComponent},
+  {path:'incomeReport',component:IncomeReportComponent},
 ];
 
 @NgModule({

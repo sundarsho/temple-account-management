@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Member, Payment } from '../models/temple.model';
+import { GroupSummaryStatistics, Member, Payment } from '../models/temple.model';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -65,6 +65,10 @@ export class MasterService {
   }
   exportPaymentsToCsv(params: HttpParams): Observable<Blob> {
     return this.http.get(this.baseUrl+"/payment/export?"+params.toString(), { responseType: 'blob' });
+  }
+
+  incomeGroupByReportService(params: HttpParams):Observable<GroupSummaryStatistics[]>{
+    return this.http.get<GroupSummaryStatistics[]>(this.baseUrl+"/income/group-by?"+params.toString());
   }
 
 }
