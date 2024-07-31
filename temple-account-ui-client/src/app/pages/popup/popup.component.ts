@@ -30,6 +30,7 @@ export class PopupComponent implements OnInit {
         gender: new FormControl(''),
         streetAddress1: new FormControl(''),
         streetAddress2: new FormControl(''),
+        streetAddress3: new FormControl(''),
         city: new FormControl(''),
         state: new FormControl(''),
         zipCode: new FormControl(''),
@@ -40,7 +41,7 @@ export class PopupComponent implements OnInit {
         notes: new FormControl(''),
         statusInd:new FormControl('')
       });
-      
+
   }
   ngOnInit(): void {
     this.inputdata = this.data;
@@ -53,6 +54,7 @@ export class PopupComponent implements OnInit {
         gender: this.currentMemberData.gender,
         streetAddress1: this.currentMemberData.streetAddress1,
         streetAddress2: this.currentMemberData.streetAddress2,
+        streetAddress3: this.currentMemberData.streetAddress3,
         city: this.currentMemberData.city,
         state: this.currentMemberData.state,
         zipCode: this.currentMemberData.zipCode,
@@ -63,14 +65,14 @@ export class PopupComponent implements OnInit {
         notes: this.currentMemberData.notes,
         createdDt: this.currentMemberData.createdDt,
         createdBy: this.currentMemberData.createdBy,
-        status: this.currentMemberData.status 
+        status: this.currentMemberData.status
       }
 
-      if(this.member.status!=null && this.member.status!='undefined'){  
+      if(this.member.status!=null && this.member.status!='undefined'){
         if(this.member.status == 'Active'){
-          this.statusInd = true; 
+          this.statusInd = true;
         }else{
-          this.statusInd = false; 
+          this.statusInd = false;
         }
       }
 

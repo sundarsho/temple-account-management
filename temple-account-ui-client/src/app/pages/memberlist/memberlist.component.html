@@ -1,18 +1,18 @@
 <mat-card>
     <mat-card-header>
       <mat-form-field>
-        <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />        
+        <input matInput (keyup)="Filterchange($event)" placeholder="Enter the text" />
         <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Filter"> -->
       </mat-form-field>
       <span class="spacer"></span>
-        <button routerLink="/member" mat-raised-button color="primary">Add User (+)</button>     
-        <span class="space"></span>   
-        <button (click)="exportMember()" mat-raised-button color="primary">Export to CSV 
-          <mat-icon>download</mat-icon> 
+        <button routerLink="/member" mat-raised-button color="primary">Add User (+)</button>
+        <span class="space"></span>
+        <button (click)="exportMember()" mat-raised-button color="primary">Export to CSV
+          <mat-icon>download</mat-icon>
         </button>
         <span class="space"></span>
-        <button (click)="loadMemberDetails()" mat-raised-button color="primary">Refresh Data 
-          <mat-icon>refresh</mat-icon> 
+        <button (click)="loadMemberDetails()" mat-raised-button color="primary">Refresh Data
+          <mat-icon>refresh</mat-icon>
         </button>
     </mat-card-header>
     <mat-card-content>
@@ -52,7 +52,7 @@
 
       <ng-container matColumnDef="Address">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
-        <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
+        <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre><pre>{{element.streetAddress3}}</pre></td>
       </ng-container>
 <!--
       <ng-container matColumnDef="streetAddress2">

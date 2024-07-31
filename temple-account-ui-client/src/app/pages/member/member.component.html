@@ -1,6 +1,6 @@
 <form [formGroup]="memberform" (ngSubmit)="saveMember()">
     <h1 mat-dialog-title>Add Member</h1>
-    <div mat-content>      
+    <div mat-content>
        <mat-form-field>
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>
@@ -24,6 +24,10 @@
         <mat-label>street Address2</mat-label>
         <input formControlName="streetAddress2" matInput>
        </mat-form-field>
+      <mat-form-field>
+        <mat-label>street Address3</mat-label>
+        <input formControlName="streetAddress3" matInput>
+      </mat-form-field>
        <mat-form-field>
         <mat-label>city</mat-label>
         <input formControlName="city" matInput>

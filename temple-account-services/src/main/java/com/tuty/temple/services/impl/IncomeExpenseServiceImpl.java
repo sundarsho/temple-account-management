@@ -9,7 +9,6 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 @Service
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/income/v1")
+@RequestMapping("/v1/income")
 public class IncomeExpenseServiceImpl implements IncomeExpenseService {
 
     private final IncomeExpenseSearchRepository searchRepository;

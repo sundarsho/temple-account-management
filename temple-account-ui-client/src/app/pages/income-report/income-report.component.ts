@@ -42,7 +42,7 @@ export class IncomeReportComponent implements OnInit, OnDestroy{
   selectedDate: FormControl = new FormControl(new Date());
   selectedDateStr: string | null = '';
 
-  financialYearList = ['2024-2025','2023-2024','2022-2023']
+  financialYearList = ['--Select--','2024-2025','2023-2024','2022-2023']
 
   constructor(private service: MasterService, public datepipe: DatePipe, 
     private paramService: QueryParamService) {
@@ -65,8 +65,7 @@ export class IncomeReportComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.updatePieChart();
   }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+  ngOnDestroy(): void {    
   }
 
   
@@ -79,7 +78,7 @@ export class IncomeReportComponent implements OnInit, OnDestroy{
     //this.searchQuery = this.groupByForm.value;
      let params = new HttpParams();
      //let paymentDateStr : any = this.datepipe.transform(this.searchQuery.paymentDate, 'yyyy-MM-dd')?.toString();
-     params = this.financialYear? params.set("financialYear", this.financialYear) : params.set("financialYear", "2024-2025");
+     params = this.financialYear != '--Select--'? params.set("financialYear", this.financialYear) : params;
      params = this.selectedDateStr ? params.set("paymentDate", this.selectedDateStr) : params;
      params = this.groupByField? params.set("groupByField", this.groupByField) : params.set("groupByField", "paymentType");
      params = this.aggregationField? params.set("aggregationField", this.aggregationField) : params.set("aggregationField", "paymentAmount");
@@ -109,7 +108,6 @@ export class IncomeReportComponent implements OnInit, OnDestroy{
 
   changeFinancialValue(financialYear: string): void{
     this.financialYear = financialYear;
-    console.log("this.financialYear:::::"+ this.financialYear);
     this.updatePieChart();
   }
 
@@ -125,6 +123,10 @@ export class IncomeReportComponent implements OnInit, OnDestroy{
   }
 
   openExportSheet(event?: any){
+    
+  }
+
+  openExport(){
     
   }
 

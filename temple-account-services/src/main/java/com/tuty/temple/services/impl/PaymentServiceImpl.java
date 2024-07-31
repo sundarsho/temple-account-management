@@ -82,7 +82,7 @@ public class PaymentServiceImpl implements PaymentService {
     @GetMapping("/payment/export")
     public ResponseEntity<byte[]> exportPayment(PaymentSearchFilter paymentSearchFilter, HttpServletResponse response) {
         String fileName = "export_Payment_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")) + ".csv";
-        List<String> ignoreFields = Arrays.asList("streetAddress1","streetAddress2","state","zipCode",
+        List<String> ignoreFields = Arrays.asList("streetAddress1","streetAddress2","streetAddress3","state","zipCode",
                 "whatsApp", "status", "notes", "createdDt", "createdBy", "updatedDt", "updatedBy");
         try{
 

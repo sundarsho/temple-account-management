@@ -5,8 +5,6 @@ import com.tuty.temple.util.CommonUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Expression;
-import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
@@ -15,9 +13,6 @@ import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CustomJpaRepository<T,ID> extends SimpleJpaRepository<T, ID>
@@ -46,10 +41,10 @@ public class CustomJpaRepository<T,ID> extends SimpleJpaRepository<T, ID>
         query.orderBy(builder.asc(root.get(groupBy)));
         List<Object[]> results = entityManager.createQuery(query).getResultList();
         return results.stream().map(r -> GroupSummaryStatistics.builder()
-                .fieldName(groupBy)
-                .value(r[0])
+                .groupBy(groupBy)
+                .value(r[0]!=null? r[0]: "N/A")
                 .count((Long) r[1])
-                .sum(r[2]!=null? (BigDecimal) r[2]: null)
+                .sum(r[2]!=null? (BigDecimal) r[2]: BigDecimal.ZERO)
                 .build()).collect(Collectors.toList());
 
     }

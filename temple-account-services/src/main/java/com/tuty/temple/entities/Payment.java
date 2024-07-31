@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
@@ -34,7 +35,8 @@ import java.time.LocalDateTime;
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PAYMENT_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_generator")
+    @SequenceGenerator(name = "payment_generator", sequenceName = "PAYMENT_ID_SEQ", allocationSize = 1)
     @Column(name="PAYMENT_ID")
     private Long paymentId;
 

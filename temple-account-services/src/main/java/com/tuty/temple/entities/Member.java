@@ -1,19 +1,25 @@
 package com.tuty.temple.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -25,7 +31,8 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="MEMBER_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_generator")
+    @SequenceGenerator(name = "member_generator", sequenceName = "MEMBER_ID_SEQ", allocationSize = 1)
     @Column(name="MEMBER_ID")
     private Long memberId;
 
@@ -43,6 +50,9 @@ public class Member {
 
     @Column(name="STREET_ADDRESS2")
     private String streetAddress2;
+
+    @Column(name="STREET_ADDRESS3")
+    private String streetAddress3;
 
     @Column(name="CITY")
     private String city;
@@ -83,5 +93,4 @@ public class Member {
 
     @Column(name="UPDATED_BY")
     private String updatedBy;
-
 }

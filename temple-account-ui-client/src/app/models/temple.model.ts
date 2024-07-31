@@ -6,6 +6,7 @@ export interface Member {
     status: string;
     streetAddress1: string;
     streetAddress2: string;
+    streetAddress3: string;
     city: string;
     state: string;
     zipCode: string;

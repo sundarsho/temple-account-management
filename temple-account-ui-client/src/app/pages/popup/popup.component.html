@@ -28,6 +28,10 @@
         <mat-label>street Address2</mat-label>
         <input matInput [(ngModel)]="member.streetAddress2" formControlName="streetAddress2">
        </mat-form-field>
+      <mat-form-field>
+        <mat-label>street Address3</mat-label>
+        <input matInput [(ngModel)]="member.streetAddress3" formControlName="streetAddress3">
+      </mat-form-field>
        <mat-form-field>
         <mat-label>city</mat-label>
         <input matInput [(ngModel)]="member.city" formControlName="city">
@@ -59,7 +63,7 @@
        <mat-form-field class="mat-50">
         <mat-label>Notes</mat-label>
         <textarea matInput [(ngModel)]="member.notes" formControlName="notes"></textarea>
-       </mat-form-field>      
+       </mat-form-field>
     </div>
     <div mat-dialog-actions>
         <button mat-raised-button type="submit" color="primary">Save</button>

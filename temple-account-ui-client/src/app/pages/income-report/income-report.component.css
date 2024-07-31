@@ -9,7 +9,7 @@
 
 .dashboard-right{
     width: 50vw;
-    padding: 20px 15px 0px 30px;
+    padding: 20px 15px 0px 5px;
 }
 
 @media screen and (max-width: 1279px) {
@@ -26,30 +26,6 @@
     }    
 }
 
-.pie-chart{
-    position: relative;
-}
-
-.mat-chip-list-wrapper{
-    display:inline;
-}
-
-.chip-list{
-    width: 40vw;
-}
-
-.filter-dialog{
-    overflow-y: hidden;
-}
-
-.mat-mdc-row:hover {
-    background-color: aliceblue !important
-  }
-
-.space {
-  margin-right: 15px;
-}
-
 .spacer {
   flex: 1 1 auto;
 }
@@ -58,17 +34,33 @@
   cursor: pointer;
 }
 
- button{
-    margin: 5px;
-}
-
 .mat-mdc-form-field {
-  width: 15%;
   height: 70px;
   margin: 1%;
 }
 
-.mat-50{
-    width: 20%;
-    margin: 1%;
+.mat-chip-list-wrapper {
+    display: inline;
 }
+
+.chip-list {
+    width: 40vw;
+}
+
+.export-link {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 12 px;
+    text-decoration: none !important;
+}
+
+.card-title {
+    display: inline-block;
+    text-align: left;
+    font-weight: 400;
+    font-size: 20px;
+    vertical-align: -webkit-baseline-middle;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+

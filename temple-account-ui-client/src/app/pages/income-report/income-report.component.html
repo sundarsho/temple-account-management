@@ -1,6 +1,4 @@
-<div class="dashboard">
-  
-    <h1 mat-dialog-title>Income Report</h1>     
+<h1 mat-dialog-title>Income Report</h1>     
 <mat-form-field>
     <mat-label>Financial Year</mat-label>  
     <mat-select matInput [(ngModel)]="financialYear"
@@ -20,20 +18,39 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <mat-card-header>  
+<div class="dashboard">  
+    
+  <!-- <mat-card-header>  
     <span class="spacer"></span>       
       <button mat-raised-button color="primary">Export to CSV 
         <mat-icon>download</mat-icon> 
       </button>
-  </mat-card-header>
+  </mat-card-header> --> 
 
-    <div fxLayout fxLayout.lt-lg="column">
+  <div data-layout="row" data-layout-lt-lg="column">
+    <div class="dashboard-left" data-flex-gt-lg="50" data-flex-lt-lg="100">
+      <h3 class="card-title" matToolTip="Click on a section of the pie chart or the legend to reload table">Summary View</h3>
         <app-pie-chart
-            [pieChartData]="pieChartData"
-            [loading]="pieChartLoading"
-            [groupByField]="groupByField"
-            (chartClicked)="openExportSheet($event)">
+          [pieChartData]="pieChartData"
+          [loading]="pieChartLoading"
+          [groupByField]="groupByField"
+          (chartClicked)="openExportSheet($event)">
         </app-pie-chart>
     </div>
-    
+    <div class="dashboard-right" data-flex-gt-lg="50" data-flex-lg="50" data-flex-lt-lg="100">
+      <h3 class="card-title" matToolTip="This table displays transactions returned by current search filters">Payment Transactions</h3>
+      <a class="export-link" 
+          (click)="openExport()"
+          matToolTip="Click here to export search results!"
+          matToolTipPosition="right"
+          target="_blank">Export Results
+      </a>
+      <app-pie-chart
+          [pieChartData]="pieChartData"
+          [loading]="pieChartLoading"
+          [groupByField]="groupByField"
+          (chartClicked)="openExportSheet($event)">
+        </app-pie-chart>
+    </div>
+  </div>
 </div>

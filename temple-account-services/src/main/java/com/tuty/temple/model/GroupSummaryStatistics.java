@@ -12,20 +12,20 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true, builderMethodName = "builder")
 public class GroupSummaryStatistics {
 
-    private String fieldName;
+    private String groupBy;
     private Object value;
     private Long count;
     private BigDecimal sum;
 
     public String getDescription() {
-        if(("occasionCd").equalsIgnoreCase(this.fieldName)){
+        if(("occasionCd").equalsIgnoreCase(this.groupBy)){
             String code = this.value.toString();
             for (OccasionEnum occasion : OccasionEnum.values()) {
                 if (occasion.getCode().equalsIgnoreCase(code)) {
-                    return occasion.getDescription();
+                    return code+"-"+occasion.getDescription();
                 }
             }
-        }else if(("member").equalsIgnoreCase(this.fieldName)){
+        }else if(("member").equalsIgnoreCase(this.groupBy)){
             Member member = (Member) this.value;
             return member.getMemberId() +"-"+ member.getName() +"-"+ member.getAncestorVillage();
         }else{

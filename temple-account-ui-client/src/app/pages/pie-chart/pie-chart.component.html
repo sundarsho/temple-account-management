@@ -3,7 +3,7 @@
     <mat-progress-bar [ngClass]="{'visibility-hidden': !loading}" mode="indeterminate"></mat-progress-bar>
     <mat-card class="mat-elevation-z3 pie-chart-card">
         <span class="card-title" matTooltip="Click on a Section of the pie chart"></span>
-         <mat-form-field>
+         <mat-form-field class="filter-field">
             <mat-label>groupBy Field</mat-label>    
             <mat-select matInput [(ngModel)]="groupByField"
                         (selectionChange)="changeValue(groupByField)"

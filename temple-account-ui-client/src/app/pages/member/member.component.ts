@@ -23,6 +23,7 @@ export class MemberComponent {
       gender: new FormControl('Male'),
       streetAddress1: new FormControl(''),
       streetAddress2: new FormControl(''),
+      streetAddress3: new FormControl(''),
       city: new FormControl(''),
       state: new FormControl(''),
       zipCode: new FormControl(''),

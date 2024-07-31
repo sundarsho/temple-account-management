@@ -3,11 +3,11 @@
 
   <form [formGroup]="memberSearchform" (ngSubmit)="searchMember()">
     <h1 mat-dialog-title>Search Member</h1>
-    <div mat-content>     
+    <div mat-content>
        <mat-form-field>
         <mat-label>Member Id</mat-label>
         <input formControlName="memberId" matInput>
-       </mat-form-field> 
+       </mat-form-field>
        <mat-form-field>
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>
@@ -34,7 +34,7 @@
                 <mat-radio-button value="Female">Female</mat-radio-button>
             </mat-radio-group>
             <!-- <mat-checkbox formControlName="status" color="warn">Is Active</mat-checkbox> -->
-        </div>    
+        </div>
     </div>
     <div mat-actions>
         <button mat-raised-button type="submit" color="primary">Search</button>
@@ -47,7 +47,7 @@
   <br/>
     <mat-card-content>
 
-    
+
 <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSortActive="memberId" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="payment">
         <th mat-sort-header mat-header-cell *matHeaderCellDef></th>
@@ -78,7 +78,7 @@
 
       <ng-container matColumnDef="Address">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> Address</th>
-        <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre></td>
+        <td mat-cell *matCellDef="let element">{{element.streetAddress1}} <pre>{{element.streetAddress2}}</pre><pre>{{element.streetAddress3}}</pre></td>
       </ng-container>
 
       <ng-container matColumnDef="city">
@@ -98,8 +98,8 @@
       <ng-container matColumnDef="phone">
         <th mat-sort-header mat-header-cell *matHeaderCellDef> phone</th>
         <td mat-cell *matCellDef="let element">{{element.phone}}</td>
-      </ng-container>     
-      
+      </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row;columns:displayedColumns"></tr>
 
