@@ -4,6 +4,15 @@
     margin: 1%;
 }
 
+.form-container {
+  display: flex;
+  align-items: center;
+}
+
+mat-form-field {
+  margin-right: 16px; /* Adjust the space between the input and the button */
+}
+
 .mat-50{
     width: 20%;
     margin: 1%;

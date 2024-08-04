@@ -8,6 +8,7 @@ import { MasterService } from '../../services/master.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-member-report',
@@ -29,7 +30,8 @@ export class MemberReportComponent {
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
-  constructor(private service: MasterService, private router: Router) {
+  constructor(private service: MasterService, private router: Router, 
+    private utilService: UtilService) {
 
   }
 
@@ -83,11 +85,11 @@ export class MemberReportComponent {
     const fileName = `exported_file_${timestamp}.csv`; // Append timestamp to the file name
     if(params!=null && params.toString()!='undefined'){
       this.service.exportSearchMembersToCsv(params).subscribe((res: any) => {
-        this.exportReport(res, fileName);
+        this.utilService.exportReport(res, fileName);
       });
     }else{
       this.service.exportMembersToCsv().subscribe((res: any) => {
-        this.exportReport(res, fileName);
+        this.utilService.exportReport(res, fileName);
       });
     }
   }
@@ -96,19 +98,8 @@ export class MemberReportComponent {
     const timestamp = new Date().getTime(); // Get the current timestamp
     const fileName = `exported_file_${timestamp}.csv`; // Append timestamp to the file name
       this.service.exportMembersToCsv().subscribe((res: any) => {
-        this.exportReport(res, fileName);
+        this.utilService.exportReport(res, fileName);
       });    
-  }
-
-  private exportReport(res: any, fileName: string) {
-    const url = window.URL.createObjectURL(res);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = fileName; // Change the file name if needed
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
   }
 
   resetDataSource(){

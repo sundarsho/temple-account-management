@@ -88,12 +88,17 @@ export interface Occasion {
 
   export class QueryParams {
     public static readonly DEFAULT_GROUP_BY_FIELD : string = 'paymentType';
+    public static readonly DEFAULT_FINANCIAL_YEAR : string = '2024-2025';
+    public static readonly DEFAULT_AGGREGATION : string = 'paymentAmount';
+    public static readonly DEFAULT_DATE_STR : string = '';
     groupByField: string = QueryParams.DEFAULT_GROUP_BY_FIELD;  
+    selectedDateStr: string = QueryParams.DEFAULT_DATE_STR;  
+    financialYear: string = QueryParams.DEFAULT_FINANCIAL_YEAR;  
   }
 
-  export class FieldDescriptor {
-    name!: string;
-    displayName!: string;   
+  export interface FieldDescriptor {
+    name: string;
+    displayName: string;   
     
   }
 

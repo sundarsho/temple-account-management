@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { FieldDescriptor, GroupBy } from '../../models/temple.model';
 import { UtilService } from '../../services/util.service';
+import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pie-chart',
@@ -12,6 +15,11 @@ export class PieChartComponent {
     @Input() pieChartData!: any[];
     @Input() loading = false;  
     @Input() groupByField!: string;
+
+    @Input() financialYear: string = '2024-2025';
+    @Input() selectedDateStr: any;
+
+    today = new Date();
 
     view: any = [700, 600];
     showXaxis = true;
@@ -33,6 +41,8 @@ export class PieChartComponent {
     flickerState = 'pre-flick';
     loadingCount = 0;
 
+  selectedDate: FormControl = new FormControl(new Date());
+
     fieldItem!: FieldDescriptor;
     @Output() chartClicked: EventEmitter<ChartRegionClickedEvent> = new EventEmitter();
 
@@ -45,6 +55,8 @@ export class PieChartComponent {
       {value: 'receivedBy', viewValue: 'Received By'},
       {value: 'member', viewValue: 'Member'}
     ];
+
+    financialYearList = ['--Select--','2024-2025','2023-2024','2022-2023']
 
   // colorScheme = {
   //   domain: [
@@ -68,7 +80,7 @@ export class PieChartComponent {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor(private utilService: UtilService){
+  constructor(private utilService: UtilService,  public datepipe: DatePipe){
     this.onResize();    
   }
 
@@ -101,9 +113,18 @@ export class PieChartComponent {
   }
 
   changeValue(newGroup: string): void{
-    console.log("this.groupByField:::::"+ this.groupByField);
-    this.utilService.setGroupByField(newGroup);
+    this.utilService.setQueryParams(newGroup, this.financialYear, this.selectedDateStr);
   }
+
+  changeFinancialValue(financialYear: string): void{
+    this.financialYear = financialYear;
+    this.utilService.setQueryParams(this.groupByField, financialYear, this.selectedDateStr);
+  }
+
+  onDateSelected(event: MatDatepickerInputEvent<Date>){
+    this.selectedDateStr = this.datepipe.transform(event.value, 'yyyy-MM-dd');
+    this.utilService.setQueryParams(this.groupByField, this.financialYear, this.selectedDateStr);
+}
 
   onSelect(event: any): void {
     //console.log('Item clicked', JSON.parse(JSON.stringify(pieChartData)));

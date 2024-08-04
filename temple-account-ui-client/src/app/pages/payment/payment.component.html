@@ -3,13 +3,16 @@
   <mat-card>
     <mat-card-header>
       <form [formGroup]="memberform" (ngSubmit)="submitMember()">
-      <div mat-content> 
+      <div mat-content class="form-container"> 
       <mat-form-field class="mat-60">
         <mat-label>Enter MemberId</mat-label>
         <input formControlName="memberId" matInput>  
       </mat-form-field>            
         <span class="space"></span>        
-        <button mat-raised-button type="submit" color="primary">Load Member</button>
+        <!-- <button mat-raised-button type="submit" color="primary">Load Member</button> -->
+        <button type="submit" mat-raised-button color="primary">Member 
+          <mat-icon>person_search</mat-icon> 
+        </button>
       </div>
       </form>
     </mat-card-header>

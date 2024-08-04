@@ -3,7 +3,26 @@
     <mat-progress-bar [ngClass]="{'visibility-hidden': !loading}" mode="indeterminate"></mat-progress-bar>
     <mat-card class="mat-elevation-z3 pie-chart-card">
         <span class="card-title" matTooltip="Click on a Section of the pie chart"></span>
-         <mat-form-field class="filter-field">
+        <div class="form-container"> 
+        <mat-form-field class="filter-field">
+            <mat-label>Financial Year</mat-label>  
+            <mat-select matInput [(ngModel)]="financialYear"
+                        (selectionChange)="changeFinancialValue(financialYear)"
+                        placeholder="Financial Year"
+                        hintLabel="Financial Year:">
+                @for (item of financialYearList; track item) {
+                    <mat-option [value]="item">{{item}}</mat-option>
+                }
+            </mat-select>     
+          </mat-form-field>
+        <mat-form-field class="filter-field">
+            <mat-label>Payment Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [max]="today" (dateChange)="onDateSelected($event)" >
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        <mat-form-field class="filter-field">
             <mat-label>groupBy Field</mat-label>    
             <mat-select matInput [(ngModel)]="groupByField"
                         (selectionChange)="changeValue(groupByField)"
@@ -14,6 +33,7 @@
                 }
             </mat-select>
         </mat-form-field>
+        </div>
         <div class="pie-chart-container" style="display: grid">
             <ngx-charts-pie-chart
                 style="margin-top: 10px"

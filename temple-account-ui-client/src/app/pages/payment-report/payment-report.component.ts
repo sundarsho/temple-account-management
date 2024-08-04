@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-payment-report',
@@ -30,7 +31,8 @@ export class PaymentReportComponent {
   @ViewChild(MatPaginator) paginatior !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
   
-  constructor(private service: MasterService, public datepipe: DatePipe) {    
+  constructor(private service: MasterService, public datepipe: DatePipe,
+    private utilService: UtilService) {    
 
     this.paymentsearchform = new FormGroup({
       memberId: new FormControl(''),
@@ -119,23 +121,11 @@ exportPayment(params: HttpParams){
   const timestamp = new Date().getTime(); // Get the current timestamp
   const fileName = `exported_file_${timestamp}.csv`; // Append timestamp to the file name
   this.service.exportPaymentsToCsv(params).subscribe((res: any) => {
-      this.exportReport(res, fileName);
-    });
+    this.utilService.exportReport(res, fileName);
+  });
     
 }
 
-
-private exportReport(res: any, fileName: string) {
-  const url = window.URL.createObjectURL(res);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName; // Change the file name if needed
-  document.body.appendChild(a);
-  a.click();
-  window.URL.revokeObjectURL(url);
-  document.body.removeChild(a);
-}
-  
   resetDataSource(){
     if(this.dataSource){
       this.dataSource = [];
