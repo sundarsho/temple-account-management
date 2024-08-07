@@ -98,7 +98,6 @@ export interface Occasion {
 
   export interface FieldDescriptor {
     name: string;
-    displayName: string;   
-    
+    displayName: string; 
   }
 

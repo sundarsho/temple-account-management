@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, signal, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Member, Occasion, Payment, SearchPaymentQuery } from '../../models/temple.model';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MasterService } from '../../services/master.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { HttpParams } from '@angular/common/http';
@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditPaymentComponent } from '../edit-payment/edit-payment.component';
 import { PrintTemplateComponent } from '../print-template/print-template.component';
+import { ReferenceData } from '../../models/reference-data.model';
 
 @Component({
   selector: 'app-payment',
@@ -41,7 +42,7 @@ export class PaymentComponent implements OnInit{
   @ViewChild(MatSort) sort !: MatSort;
   
   constructor(private service: MasterService, private route: ActivatedRoute, 
-    private _snackBar: MatSnackBar, private dialog: MatDialog) {    
+    private _snackBar: MatSnackBar, private dialog: MatDialog, private fb: FormBuilder) {    
 
     this.paymentform = new FormGroup({
       memberId: new FormControl(''),
@@ -53,7 +54,17 @@ export class PaymentComponent implements OnInit{
       financialYear: new FormControl(''),
       receivedBy: new FormControl(''),
       comments: new FormControl('')
-    });    
+    });   
+    
+    this.paymentform = this.fb.group({
+      paymentDate: ['', Validators.required],
+      financialYear: ['', Validators.required],
+      occasionCd: ['', Validators.required],
+      paymentType: ['', Validators.required],
+      paymentMode: ['', Validators.required],
+      paymentAmount: ['', Validators.required],
+      receivedBy: ['', Validators.required]
+    });
 
     this.memberform = new FormGroup({
       memberId: new FormControl('')
@@ -62,22 +73,11 @@ export class PaymentComponent implements OnInit{
 
   memberDetails!: any;
 
-  occasions: Occasion[] = [
-    {value: 'MSRP', viewValue: 'Maha Sivarathri Poojai'},
-    {value: 'MDP', viewValue: 'Mandala Poojai'},
-    {value: 'VIL', viewValue: 'Vilakku Poojai'},
-    {value: 'VAR', viewValue: 'Varushabisegam'},
-    {value: 'LAK', viewValue: 'Laksharchanai'},
-    {value: 'KUB', viewValue: 'Kumbabisegam'},
-    {value: 'TKP', viewValue: 'Thiru Karthigai Poojai'},
-    {value: 'SP', viewValue: 'Special Poojai'},
-    {value: 'RP', viewValue: 'Regular Poojai'},
-    {value: 'GEN', viewValue: 'General'},
-  ];
+  occasions: Occasion[] = ReferenceData.DEFAULT_OCCASIONS;
 
-  paymentTypeList=['Tax','Donation','Hundiyal','Poojai']
-  paymentModeList=['Cash','UPI','Bank']
-  financialYearList = ['2024-2025','2023-2024','2022-2023']
+  paymentTypes=ReferenceData.DEFAULT_PAYMENT_TYPES;
+  paymentModes=ReferenceData.DEFAULT_PAYMENT_MODES;
+  financialYears = ReferenceData.DEFAULT_FINANCIAL_YEARS;
 
   ngOnInit() {    
     this.loadMemberAndPayments();
@@ -118,18 +118,23 @@ export class PaymentComponent implements OnInit{
   }
 
   submitPayment() {
-    if(this.paymentform.dirty){
-      this.paymentform.value.member = this.memberDetails;
-      this.service.savePayment(this.paymentform.value).subscribe(data => {
-        this.payment = data;
-        //this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")
-        this.loadPayments(this.memberDetails?.memberId);
-        this.printPayment(this.payment);
-        console.log("Payment Added Successfully");
-      });
-    }
-    console.warn('Payment Added Successfully', this.paymentform.value);
-    this.paymentform.reset();
+    //if(this.paymentform.dirty){
+      if (this.paymentform.valid) {
+          this.paymentform.value.member = this.memberDetails;
+          this.service.savePayment(this.paymentform.value).subscribe(data => {
+          this.payment = data;
+          //this.openSnackBar("Member Added Successfully - [ Member ID - "+this.member.memberId+" ]", "Close")
+          this.loadPayments(this.memberDetails?.memberId);
+          this.printPayment(this.payment);
+          console.log("Payment Added Successfully");
+        });
+        console.warn('Payment Added Successfully', this.paymentform.value);
+        this.paymentform.reset();
+      }else{
+        this.paymentform.markAllAsTouched();
+      }      
+    //}
+    
   }
 
   editPayment(element: Payment) {
@@ -226,7 +231,6 @@ exportPayment(memberId:any){
     this.paymentform.reset();
     this.resetDataSource();
   }
-
-
+  
 
 }

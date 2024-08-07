@@ -71,4 +71,8 @@ export class MasterService {
     return this.http.get<GroupSummaryStatistics[]>(this.baseUrl+"/income/group-by?"+params.toString());
   }
 
+  exportGrouByStatsToCsv(params: HttpParams):Observable<Blob>{
+    return this.http.get(this.baseUrl+"/income/group-by/export?"+params.toString(), { responseType: 'blob' });        
+  }
+
 }

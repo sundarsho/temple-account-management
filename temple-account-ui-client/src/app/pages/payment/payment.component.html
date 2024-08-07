@@ -35,49 +35,72 @@
      
      <mat-form-field>
       <mat-label>Financial Year</mat-label>      
-      <input [matAutocomplete]="auto" formControlName="financialYear" matInput>
+      <input [matAutocomplete]="auto" formControlName="financialYear" matInput required>
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option [value]="item" *ngFor="let item of financialYearList">{{item}}</mat-option>
+          <mat-option [value]="item" *ngFor="let item of financialYears">{{item}}</mat-option>
         </mat-autocomplete>
+      <mat-error *ngIf="paymentform.get('financialYear')?.hasError('required')">
+        This field is required
+      </mat-error>
     </mat-form-field>     
      <mat-form-field>
       <mat-label>Payment Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="paymentDate">
+      <input matInput [matDatepicker]="picker" formControlName="paymentDate" required>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="paymentform.get('paymentDate')?.hasError('required')">
+        This field is required
+      </mat-error>
     </mat-form-field>
      <mat-form-field class="mat-50">
       <mat-label>Function/Occasion</mat-label>
-      <mat-select formControlName="occasionCd" >
+      <mat-select formControlName="occasionCd" required>
         @for (occasion of occasions; track occasion) {
           <mat-option [value]="occasion.value">{{occasion.viewValue}}</mat-option>
         }
-      </mat-select>      
+      </mat-select>     
+      <mat-error *ngIf="paymentform.get('occasionCd')?.hasError('required')">
+        This field is required
+      </mat-error> 
      </mat-form-field>
      <mat-form-field>
       <mat-label>Payment Type</mat-label>
       <!-- <input matInput> -->
-      <input [matAutocomplete]="type" formControlName="paymentType" matInput>
+      <input [matAutocomplete]="type" formControlName="paymentType" matInput required>
         <mat-autocomplete #type="matAutocomplete">
-          <mat-option [value]="item" *ngFor="let item of paymentTypeList">{{item}}</mat-option>
-        </mat-autocomplete>      
+          <mat-option [value]="item" *ngFor="let item of paymentTypes">{{item}}</mat-option>
+        </mat-autocomplete>   
+        <mat-error *ngIf="paymentform.get('paymentType')?.hasError('required')">
+          This field is required
+        </mat-error>    
     </mat-form-field>
     <mat-form-field>
       <mat-label>Payment Mode</mat-label>
       <!-- <input matInput> -->
-      <input [matAutocomplete]="mode" formControlName="paymentMode" matInput>
+      <input [matAutocomplete]="mode" formControlName="paymentMode" matInput required>
         <mat-autocomplete #mode="matAutocomplete">
-          <mat-option [value]="item" *ngFor="let item of paymentModeList">{{item}}</mat-option>
+          <mat-option [value]="item" *ngFor="let item of paymentModes">{{item}}</mat-option>
         </mat-autocomplete>
+        <mat-error *ngIf="paymentform.get('paymentMode')?.hasError('required')">
+          This field is required
+        </mat-error>    
     </mat-form-field>
      <mat-form-field>
       <mat-label>Payment Amount</mat-label>
-      <input formControlName="paymentAmount" type="number" matInput>
+      <input formControlName="paymentAmount" 
+        type="number" 
+        matInput required>
+        <mat-error *ngIf="paymentform.get('paymentAmount')?.hasError('required')">
+          This field is required
+        </mat-error>    
      </mat-form-field>   
      <mat-form-field>
       <mat-label>Received By</mat-label>
-      <input formControlName="receivedBy" matInput>
+      <input formControlName="receivedBy" matInput required>
+      <mat-error *ngIf="paymentform.get('receivedBy')?.hasError('required')">
+        This field is required
+      </mat-error> 
      </mat-form-field>     
      <mat-form-field>
       <mat-label>Comments</mat-label>

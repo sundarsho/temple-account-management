@@ -17,19 +17,27 @@ export class UtilService{
     constructor(private route: ActivatedRoute, private router: Router){
         this.route.queryParams.subscribe(p => {
             let groupingParam: string = p['grouping'];
+            let financialYearParam: string = p['financialYear'];
+            let selectedDateParam: string = p['selectedDateStr'];
             this.params = {
                 groupByField: groupingParam? groupingParam : QueryParams.DEFAULT_GROUP_BY_FIELD,
+                financialYear: financialYearParam? financialYearParam : QueryParams.DEFAULT_FINANCIAL_YEAR,
+                selectedDateStr: selectedDateParam? selectedDateParam : QueryParams.DEFAULT_DATE_STR
             };
             this.paramSource.next(this.params);
         });
     }
 
-    setQueryParams(groupByField: string){
+    setQueryParams(groupByField: string, financialYear: string, selectedDateStr: string){
         let newParams: QueryParams = this.params;
         if(groupByField) newParams.groupByField = groupByField;
+        if(financialYear) newParams.financialYear = financialYear;
+        if(selectedDateStr) newParams.selectedDateStr = selectedDateStr;
         if(groupByField){
             let queryParams: any = {};
             if(groupByField) queryParams.grouping = groupByField;
+            if(financialYear) queryParams.financialYear = financialYear;
+            if(selectedDateStr) queryParams.selectedDateStr = selectedDateStr;
             this.router.navigate([], {
                 queryParamsHandling: 'merge',
                 skipLocationChange: false,
@@ -43,6 +51,17 @@ export class UtilService{
     }
 
     setGroupByField(groupByField: string){
-        this.setQueryParams(groupByField);
+        this.setQueryParams(groupByField, '', '');
     }
+
+    exportReport(res: any, fileName: string) {
+        const url = window.URL.createObjectURL(res);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; // Change the file name if needed
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }
 }

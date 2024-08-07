@@ -9,7 +9,7 @@
           <mat-label>Financial Year</mat-label>      
           <input [matAutocomplete]="auto" formControlName="financialYear" matInput>
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option [value]="item" *ngFor="let item of financialYearList">{{item}}</mat-option>
+              <mat-option [value]="item" *ngFor="let item of financialYears">{{item}}</mat-option>
             </mat-autocomplete>
         </mat-form-field>     
          <mat-form-field>
@@ -32,7 +32,7 @@
           <!-- <input matInput> -->
           <input [matAutocomplete]="type" formControlName="paymentType" matInput>
             <mat-autocomplete #type="matAutocomplete">
-              <mat-option [value]="item" *ngFor="let item of paymentTypeList">{{item}}</mat-option>
+              <mat-option [value]="item" *ngFor="let item of paymentTypes">{{item}}</mat-option>
             </mat-autocomplete>      
         </mat-form-field>
         <mat-form-field>
@@ -40,7 +40,7 @@
           <!-- <input matInput> -->
           <input [matAutocomplete]="mode" formControlName="paymentMode" matInput>
             <mat-autocomplete #mode="matAutocomplete">
-              <mat-option [value]="item" *ngFor="let item of paymentModeList">{{item}}</mat-option>
+              <mat-option [value]="item" *ngFor="let item of paymentModes">{{item}}</mat-option>
             </mat-autocomplete>
         </mat-form-field>
          <!-- <mat-form-field>

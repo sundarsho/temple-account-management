@@ -13,12 +13,13 @@
         <mat-label>Father Name</mat-label>
         <input matInput [(ngModel)]="member.fatherName" formControlName="fatherName">
        </mat-form-field>
-       <mat-form-field>
-        <mat-label>Gender</mat-label>
-        <input matInput [(ngModel)]="member.gender" formControlName="gender" readonly>
-       </mat-form-field>
-        <div>
-        <mat-checkbox [(ngModel)]="statusInd" formControlName="statusInd">Is Active</mat-checkbox>
+       <div>
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <input matInput [(ngModel)]="member.gender" formControlName="gender" readonly>
+          </mat-form-field>
+            
+            <mat-checkbox [(ngModel)]="statusInd" formControlName="statusInd">Is Active</mat-checkbox>
        </div>
        <mat-form-field>
         <mat-label>Street Address1</mat-label>

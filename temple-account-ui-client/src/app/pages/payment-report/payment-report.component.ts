@@ -9,6 +9,7 @@ import { HttpParams } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { UtilService } from '../../services/util.service';
+import { ReferenceData } from '../../models/reference-data.model';
 
 @Component({
   selector: 'app-payment-report',
@@ -48,22 +49,11 @@ export class PaymentReportComponent {
 
   }
 
-  occasions: Occasion[] = [
-    {value: 'MSRP', viewValue: 'Maha Sivarathri Poojai'},
-    {value: 'MDP', viewValue: 'Mandala Poojai'},
-    {value: 'VIL', viewValue: 'Vilakku Poojai'},
-    {value: 'VAR', viewValue: 'Varushabisegam'},
-    {value: 'LAK', viewValue: 'Laksharchanai'},
-    {value: 'KUB', viewValue: 'Kumbabisegam'},
-    {value: 'TKP', viewValue: 'Thiru Karthigai Poojai'},
-    {value: 'SP', viewValue: 'Special Poojai'},
-    {value: 'RP', viewValue: 'Regular Poojai'},
-    {value: 'GEN', viewValue: 'General'},
-  ];
+  occasions: Occasion[] = ReferenceData.DEFAULT_OCCASIONS;
 
-  paymentTypeList=['Tax','Donation','Hundiyal','Poojai']
-  paymentModeList=['Cash','UPI','Bank']
-  financialYearList = ['2024-2025','2023-2024','2022-2023']
+  paymentTypes=ReferenceData.DEFAULT_PAYMENT_TYPES;
+  paymentModes=ReferenceData.DEFAULT_PAYMENT_MODES;
+  financialYears = ReferenceData.DEFAULT_FINANCIAL_YEARS;
 
   ngOnInit() {    
 
